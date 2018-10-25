@@ -1,0 +1,24 @@
+login-page{
+.logo{ margin: 16% auto 5%; display: block}
+  .wel{ margin: 0 auto 14%; display: block}
+  .loginBg{ background: url("../assets/img/login.jpg") no-repeat center; width: 100%; height: 100%; overflow: hidden; background-size: cover}
+  .loginBg .item{ background:rgba(0,0,0,0.5);width: 74%; margin: 0 auto; border-radius: 5px; color: #fff}
+  .loginBg button{ border-radius: 1.8rem; width: 74%; margin: 30px auto 0; }
+  .loginBg ion-range{ width:74%; margin:0 auto;background:rgba(0,0,0,0.2);border-radius: 5px;}
+  .loginBg ion-range .range-slider{ margin: 0 23px;}
+  .loginBg ion-range .range-bar-active{ background: rgba(0,0,0,0.6)}
+  .loginBg ion-range .range-bar{ top:0;  height:100%; background: none}
+  .loginBg ion-range .range-knob-handle{ top:0; margin-top: 0; margin-left: -30px;}
+  .loginBg ion-range .range-knob{
+    border-radius: 5px;
+    height: 80%;
+    width: 40px;
+    top:10%;
+    background: rgba(255,255,255,0.8) url("../assets/img/right.png") no-repeat center;
+    background-size: contain;
+    left: 10px}
+  .loginBg ion-range .range-knob-max .range-knob{
+    background: rgba(255,255,255,0.8) url("../assets/img/yanzhengcg.png") no-repeat center;
+    background-size: contain;}
+  .torepass{ width: 100%; padding: 15px; text-align: center; display: block}
+}

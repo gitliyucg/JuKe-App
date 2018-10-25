@@ -1,0 +1,512 @@
+
+$font-path: "../assets/fonts";
+@import "ionic.globals";
+
+$colors: (
+  primary:    #ff4a02,
+  secondary:  #32db64,
+  danger:     #f53d3d,
+  light:      #f4f4f4,
+  dark:       #222,
+  gray:       #c9c9c9,
+  deepgray:   #666
+
+);
+$toolbar-md-button-color :#333333;
+$toolbar-ios-button-color :#333333;
+
+
+/*设置图标*/
+@font-face {font-family: "tubiao";
+          src: url('../assets/fonts/iconfont.eot'); /* IE9*/
+          src: url('../assets/fonts/iconfont.eot#iefix') format('embedded-opentype'), /* IE6-IE8 */
+          url('../assets/fonts/iconfont.woff') format('woff'), /* chrome, firefox */
+          url('../assets/fonts/iconfont.ttf') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+          url('../assets/fonts/iconfont.svg#tubiao') format('svg'); /* iOS 4.1- */
+        }
+
+.tubiao {
+  font-family: "tubiao" !important;
+  font-size: 2rem; //设置图标大小
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-stroke-width: 0.2px;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+form ::-webkit-input-placeholder { /* WebKit browsers */
+  font-size: 1.4rem;
+}
+.select-placeholder{font-size: 1.4rem;}
+.toastClass{ width: 60%; text-align: center; left: 50%; margin-left: -30%}
+.ion-ios-quxiao:before{
+  @extend .tubiao;
+  content: "\e6d3";
+  font-size: 1.8rem;
+}
+.ion-ios-quxiao-outline:before{
+  @extend .tubiao;
+  content: "\e6d3";
+  font-size: 1.8rem;
+}
+.ion-ios-alert:before{
+  @extend .tubiao;
+  content: "\e626";
+}
+.ion-ios-alert-outline:before {
+  @extend .tubiao;
+  content: "\e626";
+}
+.ion-ios-alert:before{
+  @extend .tubiao;
+  content: "\e626";
+}
+.ion-ios-alert-outline:before {
+  @extend .tubiao;
+  content: "\e626";
+}
+/*首页*/
+.ion-ios-home:before {
+  @extend .tubiao;
+  content: "\e631";
+ }
+
+.ion-ios-home-outline:before {
+  @extend .tubiao;
+  content: "\e631";
+ }
+.ion-md-home:before {
+  @extend .tubiao;
+  content: "\e631";
+ }
+
+/*资讯*/
+.ion-ios-news:before {
+  @extend .tubiao;
+  content: "\e63f";
+ }
+
+.ion-ios-news-outline:before {
+  @extend .tubiao;
+  content: "\e63f";
+ }
+.ion-md-news:before {
+  @extend .tubiao;
+  content: "\e63f";
+ }
+
+/*会员*/
+.ion-ios-huiyuan:before {
+  @extend .tubiao;
+  content: "\e643";
+ }
+.ion-ios-huiyuan-outline:before {
+  @extend .tubiao;
+  content: "\e643";
+ }
+.ion-md-huiyuan:before {
+  @extend .tubiao;
+  content: "\e643";
+ }
+
+// 左上角返回按钮
+.ion-ios-arrow-back:before{
+  @extend .tubiao;
+  content: "\e638";
+  padding-top:15%;
+ }
+.ion-ios-arrow-back-outline:before {
+  @extend .tubiao;
+  content: "\e638";
+ }
+.ion-md-arrow-back:before {
+  @extend .tubiao;
+  content: "\e638";
+ }
+// 报单金额
+.ion-ios-baodanjinechongzhi:before {
+  @extend .tubiao;
+  content: "\e61e";
+  color:#fc4902;
+ }
+.ion-ios-baodanjinechongzhi-outline:before {
+  @extend .tubiao;
+  content: "\e61e";
+  color:#fc4902;
+ }
+.ion-md-baodanjinechongzhi:before {
+  @extend .tubiao;
+  content: "\e61e";
+  color:#fc4902;
+ }
+
+// 天天收益提现
+.ion-ios-tiantianshouyitixian:before {
+  @extend .tubiao;
+  content: "\e62f";
+  color:#fc4902;
+ }
+.ion-ios-tiantianshouyitixian-outline:before {
+  @extend .tubiao;
+  content: "\e62f";
+  color:#fc4902;
+ }
+.ion-md-tiantianshouyitixian:before {
+  @extend .tubiao;
+  content: "\e62f";
+  color:#fc4902;
+}
+  // 转化
+.ion-ios-huzhuan:before {
+  @extend .tubiao;
+  content: "\e62b";
+  color:#fc4902;
+  font-size: 2.2rem;
+}
+.ion-ios-huzhuan-outline:before {
+  @extend .tubiao;
+  content: "\e62b";
+  color:#fc4902;
+}
+.ion-md-huzhuan:before {
+  @extend .tubiao;
+  content: "\e62b";
+  color:#fc4902;
+}
+// 积分互转
+.ion-ios-jifenhuzhuan:before {
+  @extend .tubiao;
+  content: "\e622";
+  color:#fc4902;
+  font-size: 2.2rem;
+ }
+.ion-ios-jifenhuzhuan-outline:before {
+  @extend .tubiao;
+  content: "\e622";
+  color:#fc4902;
+ }
+.ion-md-jifenhuzhuan:before {
+  @extend .tubiao;
+  content: "\e622";
+  color:#fc4902;
+}
+
+// 会员注册
+.ion-ios-huiyuanzhuce:before {
+  @extend .tubiao;
+  content: "\e677";
+  color:#fc4902;
+ }
+.ion-ios-huiyuanzhuce-outline:before {
+  @extend .tubiao;
+  content: "\e677";
+  color:#fc4902;
+ }
+.ion-md-huiyuanzhuce:before {
+  @extend .tubiao;
+  content: "\e677";
+  color:#fc4902;
+}
+// 复投
+.ion-ios-futou:before {
+  @extend .tubiao;
+  content: "\e6b7";
+  color:#fc4902;
+ }
+.ion-ios-futou-outline:before {
+  @extend .tubiao;
+  content: "\e6b7";
+  color:#fc4902;
+ }
+.ion-md-futou:before {
+  @extend .tubiao;
+  content: "\e6b7";
+  color:#fc4902;
+}
+// 会员列表
+.ion-ios-huiyuanliebiao:before {
+  @extend .tubiao;
+  content: "\e64f";
+  color:#fc4902;
+ }
+.ion-ios-huiyuanliebiao-outline:before {
+  @extend .tubiao;
+  content: "\e64f";
+  color:#fc4902;
+ }
+.ion-md-huiyuanliebiao:before {
+  @extend .tubiao;
+  content: "\e64f";
+  color:#fc4902;
+}
+// 关系导图
+.ion-ios-guanxidaotu:before {
+  @extend .tubiao;
+  content: "\e637";
+  color:#fc4902;
+ }
+.ion-ios-guanxidaotu-outline:before {
+  @extend .tubiao;
+  content: "\e637";
+  color:#fc4902;
+ }
+.ion-md-guanxidaotu:before {
+  @extend .tubiao;
+  content: "\e637";
+  color:#fc4902;
+}
+// 申请报单
+.ion-ios-shenqingbaodan:before {
+  @extend .tubiao;
+  content: "\e662";
+  color:#fc4902;
+ }
+.ion-ios-jifenhuzhuan-outline:before {
+  @extend .tubiao;
+  content: "\e662";
+  color:#fc4902;
+ }
+.ion-md-jifenhuzhuan:before {
+  @extend .tubiao;
+  content: "\e622";
+  color:#bcfc10;
+}
+// 收货地址管理
+.ion-ios-shouhuodizhiguanli:before {
+  @extend .tubiao;
+  content: "\e627";
+  color:#fc4902;
+ }
+.ion-ios-shouhuodizhiguanli-outline:before {
+  @extend .tubiao;
+  content: "\e627";
+  color:#fc4902;
+ }
+.ion-md-shouhuodizhiguanli:before {
+  @extend .tubiao;
+  content: "\e627";
+  color:#fc4902;
+}
+// 账户与安全
+.ion-ios-zhanghuyuanquan:before {
+  @extend .tubiao;
+  content: "\e60d";
+  color:#fc4902;
+  font-size: 2.4rem;
+ }
+.ion-ios-zhanghuyuanquan-outline:before {
+  @extend .tubiao;
+  content: "\e60d";
+  color:#fc4902;
+ }
+.ion-md-zhanghuyuanquan:before {
+  @extend .tubiao;
+  content: "\e60d";
+  color:#fc4902;
+}
+// 帮助与反馈
+.ion-ios-bangzhuyufankui:before {
+  @extend .tubiao;
+  content: "\e618";
+  color:#fc4902;
+ }
+.ion-ios-bangzhuyufankui-outline:before {
+  @extend .tubiao;
+  content: "\e618";
+  color:#fc4902;
+ }
+.ion-md-bangzhuyufankui:before {
+  @extend .tubiao;
+  content: "\e618";
+  color:#fc4902;
+}
+// 关于剧客
+.ion-ios-guanyujuke:before {
+  @extend .tubiao;
+  content: "\e617";
+  color:#fc4902;
+ }
+.ion-ios-guanyujuke-outline:before {
+  @extend .tubiao;
+  content: "\e617";
+  color:#fc4902;
+ }
+.ion-md-guanyujuke:before {
+  @extend .tubiao;
+  content: "\e617";
+  color:#fc4902;
+}
+
+// 待收货、待发货、待支付的钟表图标
+.ion-ios-zhognbiao:before {
+  @extend .tubiao;
+  content: "\e639";
+  color:white;
+ }
+.ion-ios-zhognbiao-outline:before {
+  @extend .tubiao;
+  content: "\e639";
+  color:white;
+ }
+.ion-md-zhognbiao:before {
+  @extend .tubiao;
+  content: "\e639";
+  color:white;
+}
+
+// 交易成功
+.ion-ios-jiaoyichenggong:before {
+  @extend .tubiao;
+  content: "\e639";
+  color:white;
+ }
+.ion-ios-jiaoyichenggong-outline:before {
+  @extend .tubiao;
+  content: "\e639";
+  color:white;
+ }
+.ion-md-jiaoyichenggong:before {
+  @extend .tubiao;
+  content: "\e639";
+  color:white;
+}
+
+// 向上箭头
+.ion-ios-up:before {
+  @extend .tubiao;
+  content: "\e653";
+  color:white;
+ }
+.ion-ios-up-outline:before {
+  @extend .tubiao;
+  content: "\e653";
+  color:white;
+ }
+.ion-md-up:before {
+  @extend .tubiao;
+  content: "\e653";
+  color:white;
+}
+
+// 收益明细
+.ion-ios-shouyimingxi:before {
+  @extend .tubiao;
+  content: "\e61d";
+  color:#fc4902;
+ }
+.ion-ios-shouyimingxi-outline:before {
+  @extend .tubiao;
+  content: "\e61d";
+  color:#fc4902;
+ }
+.ion-md-shouyimingxi:before {
+  @extend .tubiao;
+  content: "\e61d";
+  color:#fc4902;
+}
+
+// 我的订单
+.ion-ios-wodedingdan:before {
+  @extend .tubiao;
+  content: "\e62a";
+  color:#fc4902;
+ }
+.ion-ios-wodedingdan-outline:before {
+  @extend .tubiao;
+  content: "\e62a";
+  color:#fc4902;
+ }
+.ion-md-wodedingdan:before {
+  @extend .tubiao;
+  content: "\e62a";
+  color:#fc4902;
+}
+
+// 设置
+.ion-ios-shezhi:before {
+  @extend .tubiao;
+  content: "\e695";
+  color:#fc4902;
+  font-size: 2.2rem;
+ }
+.ion-ios-shezhi-outline:before {
+  @extend .tubiao;
+  content: "\e695";
+  color:#fc4902;
+ }
+.ion-md-shezhi:before {
+  @extend .tubiao;
+  content: "\e695";
+  color:#fc4902;
+}
+// 我的推广
+.ion-ios-wodetuiguang:before {
+  @extend .tubiao;
+  content: "\e615";
+  color:#fc4902;
+  font-size: 2.3rem;
+ }
+.ion-ios-wodetuiguang-outline:before {
+  @extend .tubiao;
+  content: "\e615";
+  color:#fc4902;
+ }
+.ion-md-wodetuiguang:before {
+  @extend .tubiao;
+  content: "\e615";
+  color:#fc4902;
+}
+
+// 财务中心
+.ion-ios-caiwuzhongxin:before {
+  @extend .tubiao;
+  content: "\e606";
+  color:#fc4902;
+ }
+.ion-ios-caiwuzhongxin-outline:before {
+  @extend .tubiao;
+  content: "\e606";
+  color:#fc4902;
+ }
+.ion-md-caiwuzhongxin:before {
+  @extend .tubiao;
+  content: "\e606";
+  color:#fc4902;
+}
+
+// 收支流水
+.ion-ios-shouzhiliushui:before {
+  @extend .tubiao;
+  content: "\e768";
+  color:#fc4902;
+  font-size: 2.4rem;
+ }
+.ion-ios-shouzhiliushui-outline:before {
+  @extend .tubiao;
+  content: "\e768";
+  color:#fc4902;
+ }
+.ion-md-shouzhiliushui:before {
+  @extend .tubiao;
+  content: "\e768";
+  color:#fc4902;
+}
+
+// 收支流水
+.ion-ios-baodanyue:before {
+  @extend .tubiao;
+  content: "\e6d9";
+  color:#fc4902;
+  font-size: 2.2rem;
+ }
+.ion-ios-baodanyue-outline:before {
+  @extend .tubiao;
+  content: "\e6d9";
+  color:#fc4902;
+ }
+.ion-md-baodanyue:before {
+  @extend .tubiao;
+  content: "\e6d9";
+  color:#fc4902;
+}
+

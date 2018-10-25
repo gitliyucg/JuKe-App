@@ -1,0 +1,56 @@
+<ion-header>
+  <ion-navbar>
+    <button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>天天奖励提现</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content (ionScroll)="scrollHandler($event)">
+  <toTop [viewCon]="content" id="toTop"></toTop>
+  <ion-list>
+    <ion-item>
+      <ion-label>处理状态</ion-label>
+      <ion-input type="text" readonly="true" (click)="selectPopover($event)" placeholder="请选择提现状态" text-right value="{{tixianType}}"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label><i class="icon tubiao">&#xe72d;</i> 开始日期</ion-label>
+      <ion-datetime displayFormat="YYYY-MM-DD" cancelText="取消" doneText="确定" min="2016" [(ngModel)]="startDate" placeholder="请选择开始日期"></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label><i class="icon tubiao">&#xe72d;</i> 结算日期</ion-label>
+      <ion-datetime displayFormat="YYYY-MM-DD" cancelText="取消" doneText="确定" min="2016" [(ngModel)]="endDate" placeholder="请选择结算日期"></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <button ion-button block (click)="dataSearch()">查询</button>
+    </ion-item>
+  </ion-list>
+
+  <ion-list *ngFor="let item of items" class="tixianlist">
+    <button ion-item (click)="newsPage(item)">
+      <ion-row>
+        <ion-col>提现日期：{{getTime(item.WithdrawalDate)}}</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col><span class="label-ios-deepgray">状态处理：</span>{{item.ProcessState}}</ion-col>
+        <ion-col><span class="label-ios-deepgray">申请金额：</span>{{item.WithdrawalAmount}}</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col><span class="label-ios-deepgray">实发金额：</span>{{item.FactReceive}}</ion-col>
+        <ion-col><span class="label-ios-deepgray">手续费：</span>{{item.ServiceCharge}}</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col><span class="label-ios-deepgray">打款日期：</span>{{getTime(item.PaymentDate)}}</ion-col>
+      </ion-row>
+    </button>
+
+    <ion-row *ngIf="item.ProcessState=='正在处理中'" style="background: white; border: none;">
+      <ion-col class="canlButton"><button float-right (click)="cancelTixian(item.WithdrawalID)">取消提现</button></ion-col>
+    </ion-row>
+
+  </ion-list>
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="正在加载..."></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+</ion-content>

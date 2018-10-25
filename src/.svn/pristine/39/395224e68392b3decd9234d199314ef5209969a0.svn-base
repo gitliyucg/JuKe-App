@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-navbar>
+    <button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>收益明细</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content (ionScroll)="scrollHandler($event)">
+  <toTop [viewCon]="content" id="toTop"></toTop>
+
+  <ion-list>
+    <ion-item>
+      <ion-label><i class="icon tubiao">&#xe72d;</i> 开始日期</ion-label>
+      <ion-datetime  displayFormat="YYYY-MM-DD" cancelText="取消" doneText="确定" min="2016" [(ngModel)]="startDate" placeholder="请选择开始日期"></ion-datetime>
+
+    </ion-item>
+    <ion-item>
+      <ion-label><i class="icon tubiao">&#xe72d;</i> 结算日期</ion-label>
+      <ion-datetime  displayFormat="YYYY-MM-DD" cancelText="取消" doneText="确定" min="2016" [(ngModel)]="endDate" placeholder="请选择结算日期"></ion-datetime>
+
+    </ion-item>
+    <ion-item>
+      <button ion-button block (click)="dataSearch()" >查询</button>
+    </ion-item>
+  </ion-list>
+  <ion-list>
+    <ion-item *ngFor="let item of items" (click)="newPage(item.DealDate)">
+      <ion-row><ion-col>结算日期：{{getTime(item.DealDate)}}</ion-col></ion-row>
+      <ion-row><ion-col><span class="label-ios-deepgray">直推奖：</span>{{item.ZhiTui}}</ion-col><ion-col><span class="label-ios-deepgray">间推奖：</span>{{item.JianTuiJiang}}</ion-col></ion-row>
+      <ion-row><ion-col><span class="label-ios-deepgray">天天奖励：</span>{{item.TouZiBonus}}</ion-col></ion-row>
+    </ion-item>
+  </ion-list>
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="正在加载..."></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>
+

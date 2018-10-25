@@ -1,0 +1,214 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-navbar></ion-navbar>
+        <ion-title>我的订单</ion-title>
+      <!--<ion-buttons end margin-right>-->
+        <!--<button (click)="backShouYe()">-->
+          <!--<div>首页</div>-->
+        <!--</button>-->
+      <!--</ion-buttons>-->
+
+    </ion-toolbar>
+    <ion-toolbar class="myOrder">
+        <ion-segment [(ngModel)]="qiehuan">
+            <ion-segment-button value="all" (tap)="gengDuo(state='')">
+                <div>全部</div>
+            </ion-segment-button>
+            <ion-segment-button value="daifahuo" (tap)="gengDuo(state=2)">
+                <div>待发货</div>
+            </ion-segment-button>
+            <ion-segment-button value="yifahuo" (tap)="gengDuo(state=3)">
+                <div>待收货</div>
+            </ion-segment-button>
+            <ion-segment-button value="yiwancheng" (tap)="gengDuo(state=4)">
+                <div>已完成</div>
+            </ion-segment-button>
+        </ion-segment>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <div [ngSwitch]="qiehuan" class="qiehuan">
+
+        <ion-list *ngSwitchCase="'all'" no-lines>
+
+                <div *ngFor="let bb of OrdersArry;let i=index" class="orderS" >
+                    <div class="tim">{{getTime(bb.order.Times)}}</div>
+                    <div *ngFor="let aa of bb.product" class="orderL" (click)="chaKan(bb)">
+
+                        <div class="orderL_one">
+                            <div class="orderL_one1">
+                                <img src="{{aa.Images}}">
+                            </div>
+                            <div class="orderL_one2">
+                                <p>
+                                    <span>{{aa.Title}}</span>
+                                    <span>{{aa.Params}}</span>
+                                </p>
+                                <p>
+                                    <span><i class="icon tubiao">&#xe788;</i>{{aa.Price}}</span>
+                                    <span>x{{aa.Num}}</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="orderL_two">
+                      <div [ngSwitch]="bb.order.State" class="label-ios-primary">
+                        <span *ngSwitchCase="'1'">已取消</span>
+                        <span *ngSwitchCase="'3'">等待收货</span>
+                        <span *ngSwitchCase="'4'">已完成</span>
+                        <span *ngSwitchCase="'2'">等待发货</span>
+                        <span *ngSwitchCase="'6'">退款处理中</span>
+                      </div>
+                        <div>
+                            <span>共{{bb.totalNum.toFixed(0)}}件商品　</span>
+                            <span>所需积分：</span>
+                            <span class="label-ios-primary"><i class="icon tubiao">&#xe788;</i>{{bb.totalJifen.toFixed(2)}}</span>
+                        </div>
+                    </div>
+                    <div class="orderL_three" *ngIf="bb.order.State==3">
+                      <button (tap)="sureShouHuo($event,bb)" class="ord-queren">确认收货</button>
+                    </div>
+                    <div class="orderL_three" *ngIf="bb.order.State==2">
+                      <button (tap)="sureQuxiao($event,bb)" class="ord-quxiao">取消订单</button>
+                    </div>
+                    <div class="orderL_three" *ngIf="bb.order.State==1">
+                      <button (tap)="shanchu($event,bb)" class="ord-quxiao">删除订单</button>
+                    </div>
+                </div>
+            <div *ngIf="OrdersArry.length<=0" class="dingdanliang">
+                <i class="icon tubiao">&#xe77a;</i>
+                <p>您暂时没有相关订单！</p>
+            </div>
+        </ion-list>
+
+        <ion-list *ngSwitchCase="'daifahuo'" no-lines>
+
+                <div *ngFor="let bb of daifahuo;let i=index" class="orderS">
+                    <div class="tim">{{getTime(bb.order.Times)}}</div>
+                    <div *ngFor="let aa of bb.product" class="orderL" (click)="chaKan(bb)">
+
+                        <div class="orderL_one">
+                            <div class="orderL_one1">
+                                <img src="{{aa.Images}}">
+                            </div>
+                            <div class="orderL_one2">
+                                <p>
+                                    <span>{{aa.Title}}</span>
+                                    <span>{{aa.Params}}</span>
+                                </p>
+                                <p>
+                                    <span><i class="icon tubiao">&#xe788;</i>{{aa.Price}}</span>
+                                    <span>x{{aa.Num}}</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                  <div class="orderL_two">
+                    <div class="label-ios-primary">
+                      <span>等待发货</span>
+                    </div>
+                    <div>
+                      <span>共{{bb.totalNum.toFixed(0)}}件商品　</span>
+                      <span>所需积分：</span>
+                      <span class="label-ios-primary"><i class="icon tubiao">&#xe788;</i>{{bb.totalJifen.toFixed(2)}}</span>
+                    </div>
+                  </div>
+                  <div class="orderL_three" *ngIf="bb.order.State==2">
+                    <button (tap)="sureQuxiao($event,bb)" class="ord-quxiao">取消订单</button>
+                  </div>
+                </div>
+
+
+            <div *ngIf="daifahuo.length<=0" class="dingdanliang">
+                <i class="icon tubiao">&#xe77a;</i>
+                <p>您暂时没有相关订单！</p>
+            </div>
+        </ion-list>
+
+        <ion-list *ngSwitchCase="'yifahuo'" no-lines>
+
+                <div *ngFor="let bb of yifahuo;let i=index" class="orderS">
+                    <div class="tim">{{getTime(bb.order.Times)}}</div>
+                    <div *ngFor="let aa of bb.product" class="orderL" (click)="chaKan(bb)">
+
+                        <div class="orderL_one">
+                            <div class="orderL_one1">
+                                <img src="{{aa.Images}}">
+                            </div>
+                            <div class="orderL_one2">
+                                <p>
+                                    <span>{{aa.Title}}</span>
+                                    <span>{{aa.Params}}</span>
+                                </p>
+                                <p>
+                                    <span><i class="icon tubiao">&#xe788;</i>{{aa.Price}}</span>
+                                    <span>x{{aa.Num}}</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                  <div class="orderL_two">
+                    <div class="label-ios-primary">
+                      <span>等待收货</span>
+                    </div>
+                    <div>
+                      <span>共{{bb.totalNum.toFixed(0)}}件商品　</span>
+                      <span>所需积分：</span>
+                      <span class="label-ios-primary"><i class="icon tubiao">&#xe788;</i>{{bb.totalJifen.toFixed(2)}}</span>
+                    </div>
+                  </div>
+                  <div class="orderL_three" *ngIf="bb.order.State==3">
+                    <button (tap)="sureShouHuo($event,bb)" class="ord-queren">确认收货</button>
+                  </div>
+                </div>
+
+
+            <div *ngIf="yifahuo.length<=0" class="dingdanliang">
+                <i class="icon tubiao">&#xe77a;</i>
+                <p>您暂时没有相关订单！</p>
+            </div>
+        </ion-list>
+
+        <ion-list *ngSwitchCase="'yiwancheng'" no-lines>
+
+
+          <div *ngFor="let bb of yiwancheng;let i=index" class="orderS" >
+            <div class="tim">{{getTime(bb.order.Times)}}</div>
+            <div *ngFor="let aa of bb.product" class="orderL" (click)="chaKan(bb)">
+
+              <div class="orderL_one">
+                <div class="orderL_one1">
+                  <img src="{{aa.Images}}">
+                </div>
+                <div class="orderL_one2">
+                  <p>
+                    <span>{{aa.Title}}</span>
+                    <span>{{aa.Params}}</span>
+                  </p>
+                  <p>
+                    <span><i class="icon tubiao">&#xe788;</i>{{aa.Price}}</span>
+                    <span>x{{aa.Num}}</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="orderL_two">
+              <div><span >已完成</span></div>
+              <div>
+                <span>共{{bb.totalNum.toFixed(0)}}件商品　</span>
+                <span>所需积分：</span>
+                <span class="label-ios-primary"><i class="icon tubiao">&#xe788;</i>{{bb.totalJifen.toFixed(2)}}</span>
+              </div>
+            </div>
+          </div>
+            <div *ngIf="yiwancheng.length<=0" class="dingdanliang">
+                <i class="icon tubiao">&#xe77a;</i>
+                <p>您暂时没有相关订单！</p>
+            </div>
+        </ion-list>
+    </div>
+    <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="加载中 ...">
+        </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+</ion-content>

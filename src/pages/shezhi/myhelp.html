@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-navbar>
+    <button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>帮助与反馈</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="jifen">
+  <form [formGroup]="myForm">
+    <ion-list no-lines class="lines">
+      <ion-item>
+        <ion-textarea type="text" value="" formControlName="Contents" placeholder="请写下您的意见或者建议" rows="5"></ion-textarea>
+      </ion-item>
+    </ion-list>
+    <ion-list radio-group formControlName="TypeName">
+      <ion-item>
+        <ion-label>商城建议</ion-label>
+        <ion-radio value="商城建议" checked></ion-radio>
+      </ion-item>
+      <ion-item>
+      <ion-label>内容建议</ion-label>
+        <ion-radio value="内容建议"></ion-radio>
+      </ion-item>
+      <ion-item>
+      <ion-label>功能建议</ion-label>
+        <ion-radio value="功能建议"></ion-radio>
+      </ion-item>
+      <ion-item>
+      <ion-label>其他建议</ion-label>
+        <ion-radio value="其他"></ion-radio>
+      </ion-item>
+    </ion-list>
+    <ion-list no-lines class="lines">
+      <ion-item>
+        <ion-input type="text" value="" formControlName="Phone" placeholder="请留下手机号码以便我们联系您"></ion-input>
+      </ion-item>
+    </ion-list>
+
+    <div padding>
+      <button ion-button block margin-bottom (tap)="feedBack($event)" [disabled]=myForm.invalid>提交</button>
+    </div>
+  </form>
+</ion-content>

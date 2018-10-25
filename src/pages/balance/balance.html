@@ -1,0 +1,33 @@
+<!--
+  Generated template for the BalancePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-toolbar color="blance">
+    <ion-navbar class="tian-back"></ion-navbar>
+    <ion-title class="tian">结余积分</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="balance-wrap">
+    <p>{{Oldmoney}}</p>
+  </div>
+
+  <div padding style="padding-bottom: 0">
+    <button class="pad-btn" ion-button block margin-bottom (click)="toBaodan(ID)">转换到报单金额</button>
+  </div>
+
+  <div padding style="padding-top: 0; padding-bottom: 0">
+    <button ion-button block margin-bottom (click)="toTiantian(ID)" disabled="disable"style="background-color: #dcdcdc;">转换到天天奖励</button>
+  </div>
+
+  <div padding>
+    <h2 class="about-balance">关于结余积分：</h2>
+    <p>可以将结余积分转到报单金额用于复投或购买股权使用</p>
+    <p>您可以在{{year}}年{{month}}月{{day}}日将结余积分全部转换到天天奖励中提现，转换需收取5%的手续费</p>
+  </div>
+
+</ion-content>

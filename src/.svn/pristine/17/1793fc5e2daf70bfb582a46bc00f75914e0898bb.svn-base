@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-navbar></ion-navbar>
+    <ion-title>帮助与反馈</ion-title>
+    <ion-buttons end margin-right>
+      <button (click)="feedClose()" *ngIf="States!=2">
+        <div>结束问题</div>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-list no-lines>
+    <ion-item>
+      <ion-row><ion-col>{{Contents}}</ion-col></ion-row>
+    </ion-item>
+  </ion-list>
+</ion-header>
+
+<ion-content>
+  <ion-list class="hlepitem">
+    <div *ngFor="let item of items" [ngSwitch]='item.ReplyName'>
+    <ion-item  *ngSwitchCase="uid">
+      <ion-grid class="bggray">
+      <ion-row><ion-col class="f14"><span class="myname">我</span><span class="label-ios-deepgray">{{getTime(item.ReplyTimes)}}</span></ion-col></ion-row>
+      <ion-row><ion-col class="f14">{{item.Reply}}</ion-col></ion-row>
+      </ion-grid>
+    </ion-item>
+    <ion-item *ngSwitchDefault  >
+      <ion-grid class="bgred">
+      <ion-row><ion-col class="f14"><span class="systemname">{{item.ReplyName}}</span><span class="label-ios-deepgray" float-right>{{getTime(item.ReplyTimes)}}</span></ion-col></ion-row>
+      <ion-row><ion-col class="f14">{{item.Reply}}</ion-col></ion-row>
+      </ion-grid>
+    </ion-item>
+    </div>
+  </ion-list>
+
+  <form [formGroup]="myForm" *ngIf="States!=2">
+    <ion-list no-lines class="lines">
+    <ion-item>
+      <ion-textarea type="text" value="" formControlName="Contents" placeholder="请在此处追加提问" rows="5"></ion-textarea>
+    </ion-item>
+    </ion-list>
+    <div padding>
+      <button ion-button (tap)="feedBack($event)" block [disabled]=myForm.invalid>提交</button>
+    </div>
+
+  </form>
+
+</ion-content>
+
+

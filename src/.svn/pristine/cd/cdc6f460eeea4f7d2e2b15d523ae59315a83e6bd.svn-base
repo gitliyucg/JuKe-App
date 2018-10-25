@@ -1,0 +1,196 @@
+import { Component } from '@angular/core';
+import { Storage } from '@ionic/storage';
+import {Http} from "@angular/http";
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {FileService} from "../../share/fileService";
+import {AlertController, NavParams, NavController, App} from "ionic-angular";
+import { LoginPage } from '../login/login';
+import {ShareModule} from "../../share/share.module";
+@Component({
+  template:`
+    <ion-header>
+      <ion-toolbar>
+        <ion-navbar></ion-navbar>
+        <ion-title>{{passType}}密码</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <form [formGroup]="myForm" class="jifen">
+      <ion-list>
+        <div formGroupName="passWordsGroup">
+        <ion-item>
+          <ion-label>新密码</ion-label>
+          <ion-input type="password" value="" formControlName="new" placeholder="请输入新的{{passType}}密码" [(ngModel)]="newpass"></ion-input>
+        </ion-item>
+          <div class="error bgf" [hidden]="!myForm.get('passWordsGroup').get('new').dirty" *ngIf="passType=='登录'||passType=='找回'">
+            <p no-margin [hidden]="!myForm.get('passWordsGroup').hasError('pass','new')">
+              <ion-icon name="alert" float-left isActive="false"></ion-icon><span>密码为6-16位英文字母和数字,不能使用特殊字符</span>
+            </p>
+          </div>
+          <div class="error bgf" [hidden]="!myForm.get('passWordsGroup').get('new').dirty" *ngIf="passType=='二级'">
+            <p no-margin [hidden]="!myForm.get('passWordsGroup').hasError('pass','new')">
+              <ion-icon name="alert" float-left isActive="false"></ion-icon><span>密码为6位数字，不能使用英文字母和特殊字符</span>
+            </p>
+          </div>
+        <ion-item no-lines>
+          <ion-label>确认密码</ion-label>
+          <ion-input type="password" value="" formControlName="newagin" placeholder="请再次输入新的{{passType}}密码" [(ngModel)]="newpassagin"></ion-input>
+        </ion-item>
+        <div *ngIf="newpass&&newpassagin" class="error bgf">
+            <p no-margin *ngIf="myForm.hasError('pass','passWordsGroup')">
+              <ion-icon name="alert" float-left isActive="false"></ion-icon><span>请确认前后密码输入一致</span>
+            </p>
+        </div>
+        </div>
+        <div padding>
+          <button ion-button block (click)="toNewPass()" [disabled]= myForm.invalid>确认修改</button>
+        </div>
+      </ion-list>
+    </form>
+    </ion-content>
+  `
+})
+
+export class PassPage {
+  uid:string;
+  myForm:FormGroup;
+  oldpass:string;
+  newpass:string;
+  newpassagin:string;
+  passType = this.navParams.get('passType');
+  url:string;
+  constructor(
+    private http: Http,
+    private storage: Storage,
+    private formBuilder:FormBuilder,
+    private fileService:FileService,
+    private alertCtrl:AlertController,
+    private navParams: NavParams,
+  private nav:NavController,
+  private app:App,
+  private share:ShareModule) {
+
+    storage.get('userStorage').then(value => {
+      if(value) {
+        this.uid = value.uid;
+      }else{
+        this.uid = this.navParams.get('uid');
+      }
+    })
+
+    if(this.passType=="登录"){
+      this.url = this.fileService.localUrl +'/action/Users/EditPass?uid='
+      this.oldpass = this.navParams.get('oldpass');
+      this.myForm = formBuilder.group({
+        passWordsGroup:formBuilder.group({
+          new:['',[Validators.required,this.share.passFValidator]],
+          newagin:['',Validators.required]
+
+        },{validator:this.passValidator})
+
+      });
+    }else if(this.passType=="二级"){
+      this.url = this.fileService.localUrl +'/action/Users/EditSecond?uid=';
+      this.myForm = formBuilder.group({
+        passWordsGroup:formBuilder.group({
+          new:['',[Validators.required,this.share.passSValidator]],
+          newagin:['',Validators.required]
+
+        },{validator:this.passValidator})
+
+      });
+    }else if(this.passType=="找回"){
+      this.url = this.fileService.localUrl +'/action/Login/EditPass/';
+      this.myForm = formBuilder.group({
+        passWordsGroup:formBuilder.group({
+          new:['',[Validators.required,this.share.passFValidator]],
+          newagin:['',Validators.required]
+
+        },{validator:this.passValidator})
+
+      });
+    }
+  }
+  passValidator(g:FormGroup){
+    let p1:FormControl = g.get('new') as FormControl;
+    let p2:FormControl = g.get('newagin') as FormControl;
+    let valid:boolean;
+    if(p1.value&&p2.value){
+       valid = (p1.value==p2.value);
+    }
+    return valid ? null : { pass:true };
+  }
+  toNewPass(){
+    //console.log(this.myForm.get('passWordsGroup').get('new').hasError('pass'))
+    let pass,newurl;
+    if(this.passType=="登录"||this.passType=="二级") {
+      if(this.passType=="登录"){
+        pass = {old: this.oldpass, newpass: this.newpass}
+        newurl = 'login';
+      }else{
+        pass = {pass: this.newpass}
+        newurl = 'back';
+      }
+
+
+        this.http.put(this.url + this.uid, pass).subscribe(response => {
+
+          if (response.json() == true) {
+            this.alertCtrl.create({
+              title: '修改成功',
+              subTitle: '您的密码已经修改成功',
+              buttons: [{
+                text: '确定',
+                handler: () => {
+                  if(newurl=='login'){
+                      this.app.getRootNav().push(LoginPage)
+                  }else{
+                      this.nav.pop();
+                  }
+
+                }
+              }],
+              cssClass: 'fwh'
+            }).present();
+
+          } else {
+            this.alertCtrl.create({
+              title: '出错啦',
+              subTitle: '请确认网络是否接连，或者重新尝试更改密码',
+              buttons: ['确定'],
+              cssClass: 'fwh'
+            }).present();
+          }
+        })
+
+    }else if(this.passType=="找回"){
+      pass = {pass: this.newpass}
+        this.http.post(this.url + this.uid, pass).subscribe(response => {
+
+          if (response.json() == true) {
+            this.alertCtrl.create({
+              title: '修改成功',
+              subTitle: '您的密码已经修改成功，请重新登录',
+              buttons: [{
+                text: '确定',
+                handler: () => {
+                  this.app.getRootNav().push(LoginPage)
+                }
+              }],
+              cssClass: 'fwh'
+            }).present();
+
+          } else {
+            this.alertCtrl.create({
+              title: '出错啦',
+              subTitle: '请确认网络是否接连，或者重新尝试更改密码',
+              buttons: ['确定'],
+              cssClass: 'fwh'
+            }).present();
+          }
+        })
+    }
+
+
+  }
+}

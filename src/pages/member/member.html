@@ -1,0 +1,115 @@
+
+<ion-header class="member_header">
+  <ion-toolbar>
+    <!--<button class="xiaoxi" (click)="toMemberPage(xiaoxiPage)">-->
+      <!--<span *ngIf="xiaoxinum>0"></span>-->
+      <!--<i class="icon tubiao mesg">&#xe6c2;</i>-->
+    <!--</button>-->
+    <button class="shopCart" (click)="toShopCart()">
+      <span *ngIf="number>0" >{{number}}</span>
+      <i class="icon tubiao mesg">&#xe624;</i>
+    </button>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="member-con">
+  <div class="memberBg">
+    <div class="mpembername-wrap">
+      <img class="memberhead" src="assets/img/head-2.png" alt="">
+      <!--<img src="assets/img/head.png" class="memberhead" alt="">-->
+      <div class="mpembername">
+        <p>{{name}}，{{userid}}<span *ngIf="isBaodan=='1'">，报单中心</span></p>
+        <!--<p>某某积分：10000</p>-->
+      </div>
+      <!--<img src="assets/img/blank.png" width="100%"/>-->
+    </div>
+    <!--<div class="memberData">-->
+      <div class="memberData-wrap">
+        <ion-row style="display: flex; text-align: center">
+          <ion-col style="flex: 1" class="col">
+            <p (click)="toRecharge(rechargesPage)" style="color: #ffffff; font-size: 1.25em">{{shouyizonge == null ? 0 : shouyizonge}}</p>
+            <p class="ipad-p font-p" style="color: #eeeeee" (click)="toRecharge(rechargesPage)">天天奖励</p>
+          </ion-col>
+          <ion-col style="flex: 1" class="col">
+            <p (click)="toRecharge(dynamicPage)" style="color: #ffffff; font-size: 1.25em">{{dongtaizonge == null ? 0 : dongtaizonge}}</p>
+            <p class="ipad-p font-p" style="color: #eeeeee" (click)="toRecharge(dynamicPage)">动态奖励</p>
+          </ion-col>
+          <ion-col style="flex: 1" class="col">
+            <p style="color: #ffffff; font-size: 1.25em">{{jieyu == null ? 0 : jieyu}}</p>
+            <p class="ipad-p font-p" style="color: #eeeeee">结余积分</p>
+          </ion-col>
+        </ion-row>
+      </div>
+    <!--</div>-->
+  </div>
+  <div class="memberData">
+    <!--<ion-row style="display: flex">-->
+      <!--<ion-col style="flex: 1">-->
+        <!--<p (click)="toRecharge(rechargesPage)" style="color: #ff4a02; font-size: 1.25em">{{shouyizonge}}</p>-->
+        <!--<p class="ipad-p" (click)="toRecharge(rechargesPage)">天天奖励</p>-->
+      <!--</ion-col>-->
+      <!--<ion-col style="flex: 1">-->
+        <!--<p (click)="toRecharge(dynamicPage)" style="color: #ff4a02; font-size: 1.25em">{{dongtaizonge}}</p>-->
+        <!--<p class="ipad-p" (click)="toRecharge(dynamicPage)">动态奖励</p>-->
+      <!--</ion-col>-->
+      <!--<ion-col style="flex: 1">-->
+        <!--<p (click)="toRecharge(consumptionPage)" style="color: #6c7cf3; font-size: 1.25em">{{regBalance}}</p>-->
+        <!--<p class="ipad-p" (click)="toRecharge(consumptionPage)">购物积分</p>-->
+      <!--</ion-col>-->
+    <!--</ion-row>-->
+  </div>
+  <!--<ion-list class="memberorderitem">-->
+    <!--<ion-grid class="memberOrder">-->
+      <!--<ion-row>-->
+        <!--<ion-col class="huohuo" (click)="toOrder({myOrderInType:'会员中心',state:2})">-->
+          <!--<span *ngIf="numDfh>0" class="shuliangWenzi">{{numDfh}}</span>-->
+           <!--<i class="icon tubiao huo">&#xe634;</i>-->
+          <!--<p>待发货</p>-->
+        <!--</ion-col>-->
+        <!--<ion-col class="huohuo" (click)="toOrder({myOrderInType:'会员中心',state:3})">-->
+          <!--<span *ngIf="numDsh>0" class="shuliangWenzi">{{numDsh}}</span>-->
+          <!--<i class="icon tubiao huo">&#xe604;</i>-->
+          <!--<p>待收货</p>-->
+        <!--</ion-col>-->
+        <!--<ion-col class="huohuo" (click)="toOrder({myOrderInType:'会员中心',state:6})">-->
+          <!--<span *ngIf="numSh > 0">{{numSh}}</span>-->
+          <!--<i class="icon tubiao huo">&#xe6d9;</i>-->
+          <!--<p>退款/售后</p>-->
+        <!--</ion-col>-->
+      <!--</ion-row>-->
+    <!--</ion-grid>-->
+  <!--</ion-list>-->
+  <ion-list no-lines class="memberList">
+    <button ion-item  no-lines (click)="toOrder({myOrderInType:'会员中心',state:''})">
+      <ion-icon name="wodedingdan" item-start></ion-icon>
+      <span>我的订单</span><span class="label-ios-deepgray f14 itemspan">查看更多订单</span>
+    </button>
+    <!--<button ion-item (click)="toMemberPage(baodanPage)">-->
+      <!--<ion-icon name="baodanyue" item-start></ion-icon>-->
+      <!--报单余额-->
+      <!--<span class="label-ios-deepgray f14 itemspan">{{baodanzonge}}</span>-->
+    <!--</button>-->
+    <button ion-item (click)="toRecharge(walletPage)">
+      <ion-icon name="qianbao" item-start></ion-icon>
+      我的钱包
+    </button>
+
+    <button ion-item (click)="toMemberPage(caiwuPage)">
+      <ion-icon name="caiwuzhongxin" item-start></ion-icon>
+      财务中心
+    </button>
+
+    <button ion-item (click)="toMemberPage(mystockPage)">
+      <ion-icon name="mystock" item-start></ion-icon>
+      我的股权
+    </button>
+
+    <button ion-item (click)="toMemberPage(tuiguangPage)">
+      <ion-icon name="wodetuiguang" item-start></ion-icon>
+      我的推广
+    </button>
+    <button ion-item (click)="toMemberPage(shezhiPage)">
+      <ion-icon name="shezhi" item-start></ion-icon>
+      设置
+    </button>
+  </ion-list>
+</ion-content>

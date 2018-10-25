@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-navbar>
+    <button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>申请报单中心</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="jifen">
+<ion-list>
+  <ion-item>
+    <ion-label>姓名</ion-label>
+    <ion-input type="text" value="{{Name}}" readonly="true"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>身份证号码</ion-label>
+    <ion-input type="text" value="{{IDNumber}}" readonly="true"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>联系方式</ion-label>
+    <ion-input type="number" readonly="true" value="{{Phone}}"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>省份</ion-label>
+    <ion-input type="text"   value="{{Province}}"  readonly="true"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>城市</ion-label>
+    <ion-input type="text"  value="{{City}}" readonly="true"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>地区</ion-label>
+    <ion-input type="text"  value="{{Areas}}" readonly="true"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>详细地址</ion-label>
+    <ion-input type="text"  value="{{Address}}" readonly="true"></ion-input>
+  </ion-item>
+  <ion-item no-lines>
+    身份证照片
+  </ion-item>
+  <ion-grid class="upImg" padding-left padding-right>
+  <ion-row>
+    <ion-col><img [src]="avatarPath" width="100%"></ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col><img [src]="avatarPathback" width="100%"></ion-col>
+  </ion-row>
+  </ion-grid>
+</ion-list>
+</ion-content>

@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-navbar>
+    <button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>详情</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+
+  <ion-list>
+    <ion-item>
+      <ion-row>
+        <ion-col>提现日期：{{getTime(items.WithdrawalDate)}}</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col><span class="label-ios-deepgray">状态处理：</span>{{items.ProcessState}}</ion-col>
+        <ion-col><span class="label-ios-deepgray">申请金额：</span>{{items.WithdrawalAmount}}</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col><span class="label-ios-deepgray">实发金额：</span>{{items.FactReceive}}</ion-col>
+        <ion-col><span class="label-ios-deepgray">手续费：</span>{{items.ServiceCharge}}</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col><span class="label-ios-deepgray">打款日期：</span>{{getTime(items.PaymentDate)}}</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col><span class="label-ios-deepgray">原因：</span>{{items.Message}}</ion-col>
+      </ion-row>
+    </ion-item>
+  </ion-list>
+
+</ion-content>

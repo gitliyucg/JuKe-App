@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-navbar>
+    <button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>通知</ion-title>
+  </ion-navbar>
+</ion-header>
+<toTop [viewCon]="content" id="toTop"></toTop>
+<ion-content (ionScroll)="scrollHandler($event)">
+  <ion-list class="xiaoxiList" no-lines>
+    <ion-item-sliding *ngFor="let item of items">
+      <button ion-item detail-none (tap)="toNews(item)">
+        <p text-center>{{getTime(item.SendDate)}}</p>
+        <div class="xiaoxiDiv">
+           <img src="assets/img/xiaoxiweidu.png" width="8%" *ngIf="item.IsStatu==0"/>
+           <h2 *ngIf="item.SendTitle">{{item.SendTitle}}</h2>
+           <p>{{item.SendContent}}</p>
+        </div>
+      </button>
+      <ion-item-options side="right">
+        <button ion-button (tap)="deleteX($event,item.id)">删除</button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="正在加载..."></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

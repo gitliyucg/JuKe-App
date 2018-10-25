@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-navbar></ion-navbar>
+    <ion-title>购物车</ion-title>
+    <ion-buttons end margin-right>
+      <button [ngSwitch]='myVar' (tap)="bianji(myVar)">
+        <div *ngSwitchCase="'编辑'">编辑</div>
+        <div *ngSwitchCase="'完成'">完成</div>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="yixuan-content">
+
+  <yixuan [shuju]="shujus" (zongjia)="zongjia($event)"></yixuan>
+  <!--已选的，子组件-->
+
+  <div *ngIf="myVar!='添加'">
+    <div class="quanxuan" (click)="allselect()" padding>
+      <span [style.background-color]="allbuy ? '#fd4c06' : '#fff'"></span>
+      <span>全选</span>
+    </div>
+    <div style="height:80px;"></div>
+  </div>
+
+  <div [ngSwitch]='myVar'>
+    <!--当购物车为空时，显示的页面-->
+    <div *ngSwitchCase="'添加'" class="kongCarts">
+      <div (click)="goushopping()">
+        <img src="assets/img/gouwuche.png">
+        <div class="kong_tishi">您的购物车是空的哦！</div>
+        <div class="goutoshopping">快去购物吧</div>
+      </div>
+    </div>
+
+  </div>
+</ion-content>
+<ion-footer>
+  <div [ngSwitch]='myVar'>
+
+    <div class="tijiao" *ngSwitchCase="'编辑'">
+      <span>合计</span>
+      <i class="icon tubiao">&#xe788;</i>
+      <span>{{totalPrice.toFixed(2)}}</span>
+      <span *ngIf="thisallbuy.length==0" class="cart-span button-ios-gray">提交订单</span>
+      <button (tap)="tijiao(uid,tiao)" class="cart-span button-ios-primary" *ngIf="thisallbuy.length>0">提交订单</button>
+    </div>
+    <div class="delete" *ngSwitchCase="'完成'">
+      　
+      <button (tap)="shanchu()">删除</button>
+    </div>
+  </div>
+</ion-footer>

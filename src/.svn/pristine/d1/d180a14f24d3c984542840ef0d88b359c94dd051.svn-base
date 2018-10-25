@@ -1,0 +1,64 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-navbar></ion-navbar>
+    <ion-title>天天奖励提现</ion-title>
+    <ion-buttons end margin-right>
+      <button (tap)="totixianList()">
+        <div>记录</div>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="jifen">
+
+  <form [formGroup]="myForm">
+<ion-list>
+  <ion-item>
+    <ion-label>天天奖励余额</ion-label>
+    <ion-input type="number" value="{{shouyiyue}}" readonly="true"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>提现金额</ion-label>
+    <ion-input type="number" placeholder="请输入100的整数倍" formControlName="WithdrawalAmount" value="" [(ngModel)]="WithdrawInput" (input)="focusInput()"></ion-input>
+
+  </ion-item>
+  <div [hidden] = "myForm.get('WithdrawalAmount').untouched" class="error bgf">
+    <p [hidden] = "!myForm.hasError('required','WithdrawalAmount')" no-margin>
+      <ion-icon name="alert" float-left isActive="false"></ion-icon><span>提现金额是必填项</span>
+    </p>
+    <div [hidden] = "myForm.hasError('required','WithdrawalAmount')">
+    <p [hidden] = "!myForm.hasError('sum','WithdrawalAmount')" no-margin>
+      <ion-icon name="alert" float-left isActive="false"></ion-icon><span>提现金额必须是100的整数倍</span>
+    </p>
+    </div>
+    <div [hidden] = "Withdraw==0&&myForm.hasError('required','WithdrawalAmount')">
+    <p [hidden] = "WithdrawInput<=shouyiyue" no-margin>
+      <ion-icon name="alert" float-left isActive="false"></ion-icon><span>提现金额需小于收益余额</span>
+    </p>
+    </div>
+  </div>
+  <ion-item>
+    <ion-label>开户行</ion-label>
+    <ion-input value="{{Bank}}" readonly="true"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>银行卡号</ion-label>
+    <ion-input value="{{BankAccount}}" readonly="true"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>开户行所在地</ion-label>
+    <ion-input value="{{BankZhihang}}" readonly="true"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>开户人姓名</ion-label>
+    <ion-input value="{{Name}}" readonly="true"></ion-input>
+  </ion-item>
+  <p class="error" *ngIf="WithdrawConfig>0"><ion-icon name="alert" float-left isActive="false" color="danger"></ion-icon><span color="danger" ion-text>提现需要支付{{WithdrawConfig}}%退还保证金手续费，本次提现退还保证金手续费{{Withdraw|number:'2.2-2'}}元</span></p>
+</ion-list>
+
+<div padding-left padding-right>
+  <button ion-button block margin-bottom (tap)="saveForm($event)" [disabled]= "myForm.invalid || show">提现</button>
+</div>
+  </form>
+</ion-content>
+

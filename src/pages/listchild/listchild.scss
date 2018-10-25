@@ -1,0 +1,157 @@
+/*设置分享、返回*/
+.list .toolbar{
+ position:relative;
+ height:100%;
+}
+
+/*返回按钮*/
+.listchild-header .back-button{
+   color:rgba(255,255,255,0.9);
+}
+// 内容部分顶到最上边
+.list-child .fixed-content,.list-child .scroll-content{
+  margin:0!important;
+}
+.list-child .commodity-img{
+  margin: 0 auto;
+}
+.list-child .list_about img{
+  margin: 0 auto;
+}
+// 分享按钮
+.icon-fenxiang{
+  color:rgba(255,255,255,0.7);
+  position:absolute;
+  top:21px;
+  right:0px;
+}
+.icon-fenxiang a{
+  background:none;
+  box-shadow:none;
+}
+// 头部包含返回和分享那部分
+.listchild-header{
+  background-color:rgba(0,0,0,0.3);
+}
+.listchild-header .toolbar-background-ios{background: none}
+/*底部购物车*/
+.buy{
+ width:100%;
+  min-height: 2em;
+ display:flex;
+ justify-content:flex-start;
+}
+.buy a:nth-child(1){
+  background:white;
+  width:30%;
+  display:inline-block;
+
+  position:relative;
+  font-size:1.6rem;
+  padding: 15px 0;
+  height:100%;
+  overflow: hidden;
+}
+.buy a:nth-child(2){
+  color:white;
+  font-size:1.6rem;
+  width:35%;
+  text-align:center;
+  padding: 15px 0;
+  height:100%;
+  overflow: hidden;
+}
+.buy a:nth-child(3){
+
+  color:white;
+  font-size:1.6rem;
+  width:35%;
+  text-align:center;
+  padding: 15px 0;
+  height:100%;
+  overflow: hidden;
+}
+
+.gouwuche-tubiao{
+  position:absolute;
+  top:4%;
+  width:100%;
+  left: 0;
+  text-align: center;
+  color:#737171;
+}
+.gouwu-num{
+  position:absolute;
+  line-height:80%;
+  top:10%;
+  left:60%;
+  color:white;
+  padding:3px 4px;
+  border-radius:50%;
+  height: 16px;
+  width: 16px;
+  display:inline-block;
+  background:#ff4a02;
+  font-size:1rem;
+  text-align:center;
+}
+.gouwuche-text{
+  position:absolute;
+  bottom:4%;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  color:#737171;
+}
+
+// 最上边产品名称大字
+.list_child_title{
+  margin:0;
+  background:#fff;
+  font-weight: 600;
+  color: #333;
+}
+.list-child img{display: block}
+// 全场包邮那块
+.image_down{
+   width:100%;
+   display: flex;
+   background:#faf9f9;
+   justify-content:space-around;
+   border-top:1px solid rgba(0,0,0,0.2);
+  padding:8px;
+
+}
+.image_down i{
+  font-size:1rem;
+  color:#f96429;
+}
+.image_down span{
+  font-size:1.4rem;
+  margin-left: 5px;
+}
+.image_down div{
+  padding:0.2rem;
+}
+
+// 设置加入购物车动画
+.changeColor{
+  color:red;
+  font-weight:bold;
+  transition:all;
+}
+
+//产品详情
+.chanpinxiangqing{
+  background:white;
+  padding-bottom: 20px;
+  margin-bottom: 40px;
+  color: #666;
+
+}
+.chanpinxiangqing .list_title {
+  padding:0px 20px 10px;
+  margin:0;
+  line-height: 1.6;
+}
+.chanpinxiangqing p{ }

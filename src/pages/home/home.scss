@@ -1,0 +1,84 @@
+page-home {
+.card-md,.card-ios{
+  border-radius: 0px;
+  box-shadow:none;
+  }
+.card-content-md,.card-content-ios{ padding: 15px;line-height: 1.6}
+.card-title-md,.card-title-ios{ font-size: 1.8rem; padding-top: 5px; padding-bottom: 5px; color: #000;}
+  .card-ios p{ color: #333}
+// .homepage {
+
+// .card-left,.card-right{ width:48.5%}
+// .card-bottom{ position: absolute; right: 0; bottom: 0; width:48.5%}
+// }
+/*设置信息、搜索图标*/
+.sousuo{
+  color:rgba(255,255,255,0.7);
+  position:absolute;
+  left:1rem;
+  bottom:0.5rem;
+}
+
+/*设置中间内容部分*/
+.scroll-content{
+    margin-top: 0!important;
+  }
+}
+
+.orderInfo .list{ background: #fff; font-size:1.5rem}
+.orderInfo .list [float-left]{ margin-right: 20px}
+
+.home_header{
+  background:rgba(0,0,0,0.3)!important;
+}
+.home_header .toolbar-background-ios{ background: none}
+.home_header .toolbar-title-ios{ color: #fff}
+.f12{ font-size: 1.2rem}
+.f14{ font-size: 1.4rem}
+.f15{ font-size: 1.5rem}
+.f16{ font-size: 1.6rem}
+.f18{ font-size: 1.8rem}
+.mr15{ margin-right: 15px}
+/*内页标题*/
+.toolbar-title-ios, .toolbar-title-md {
+  font-weight: normal;
+  font-size: 2rem
+}
+.header-ios .toolbar-background-ios, .header-ios .toolbar-background-md {
+  border: 0
+}
+ion-buttons button{ background: none; font-size: 1.5rem; padding: 0}
+.toolbar { padding: 0}
+.alert-ios .alert-button{ border-top: 1px solid #dbdbdf;border-right:1px solid #dbdbdf}
+.clearfix:after {
+  content: "";     /*内容为“.”就是一个英文的句号而已。也可以不写。*/
+  display: block;   /*加入的这个元素转换为块级元素。*/
+  clear: both;     /*清除左右两边浮动。*/
+  visibility: hidden;      /*可见度设为隐藏。注意它和display:none;是有区别的。visibility:hidden;仍然占据空间，只是看不到而已；*/
+  line-height: 0;    /*行高为0；*/
+  height: 0;     /*高度为0；*/
+  font-size:0;    /*字体大小为0；*/
+}
+.tabs-ios .tabbar{ border-top: 1px solid rgba(0, 0, 0, 0.3)}
+#mySlider{
+  width:100%;
+  height:75vw;
+}
+#mySlider button{padding: 0; height: 100%; width: 100%}
+#mySlider img{
+  width:100%!important;
+  height:100% !important
+}
+.slide-title{ position: absolute; bottom:0; background: rgba(0,0,0,0.3); width:100%; color: #fff; text-align: left; font-weight: normal; font-size: 1.6rem;}
+.slide-title div{white-space:nowrap;overflow:hidden;text-overflow:ellipsis; margin-right: 80px}
+.slide-zoom{ height: 100%}
+.welcome{ background:#fff; position: fixed; z-index: 9999; width: 100%; height: 100%; left: 0;  top:0;}
+#indexkey{z-index: 10001;position: relative}
+.seconds{width: 50px; height: 50px; border-radius: 50%; background: rgba(255,255,255,0.3); border: 1px #ddd solid;
+  z-index:1000; position: absolute;right:10%;  top:5%; line-height: 50px; text-align: center; color: #666; font-size: 1.8rem}
+//警告窗口样式
+.alertClass .alert-message{ font-size: 1.6rem}
+.alertClass .alert-wrapper{ width: 76%; border-radius: 5px; max-width: 80%}
+.alertClass .alert-button{ font-size: 1.5rem; font-weight: normal}
+.alertClass .canBtn{ color: #222}
+.alertClass .sureBtn{ color: #fff; background: #ff4a02}

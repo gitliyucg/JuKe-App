@@ -1,0 +1,5 @@
+<ion-tabs id="buttomTabs" #myTabs>
+  <ion-tab [root]="tab1Root" tabTitle="首页" tabIcon="home" (tap)="tab1()"></ion-tab>
+  <ion-tab [root]="tab2Root" tabTitle="新闻" tabIcon="news" (tap)="tab2()"></ion-tab>
+  <ion-tab [root]="tab3Root" tabTitle="会员" tabIcon="huiyuan" (tap)="tab3()"></ion-tab>
+</ion-tabs>

@@ -1,0 +1,206 @@
+import { Component } from '@angular/core';
+import {FormBuilder, FormGroup, Validators,FormControl} from '@angular/forms';
+import { Injectable } from '@angular/core';
+import { Http} from '@angular/http';
+import {PopoverController,NavController,AlertController} from "ionic-angular";
+import { PopovercodePage} from '../../share/pagination/popovercode';
+import {JifenlistPage} from "./jifenlist";
+import {ShareModule} from "../../share/share.module";
+import {FileService} from "../../share/fileService";
+import {SubSuccess} from "../../pages/succ/success";
+import { Storage } from '@ionic/storage';
+import 'rxjs/add/operator/timeout'
+@Injectable()
+@Component({
+  templateUrl: 'jifen.html'
+
+})
+
+
+export class JifenPage {
+  public show: boolean;
+  uid:string;
+  myForm:FormGroup;
+  dongtaiyue:number; //动态余额
+  shouyiyue:number;   //天天收益
+  jifenType:string = '';  //积分类型
+  username:string;
+  AcceptUserId:string;
+  constructor(public formBuilder:FormBuilder,
+              public http:Http,
+              private pop:PopoverController,
+              private nav:NavController,
+              private share:ShareModule,
+              private alertCtrl: AlertController,
+              private fileService: FileService,
+              private storage: Storage) {
+
+    this.myForm = formBuilder.group({
+      AcceptUserName: ['', Validators.required],
+      uidGroup: formBuilder.group({
+        myuid: [],
+        AcceptUserId: ['', Validators.required]
+      }, {validator: this.uidValidator}),
+      MoneyGroup: formBuilder.group({
+        shouyiyue: [],
+        dongtaiyue: [],
+        MoneySum: ['', [Validators.required, this.share.IntValidator]],
+        TransferType: ['', Validators.required]
+      }, {validator: this.getSumValidator})
+    })
+  }
+  ionViewWillEnter(){
+    this.storage.get('userStorage').then(value => {
+      if(value){
+        this.uid = value.userid;
+        this.http.get(this.fileService.localUrl+'/action/Users/GetYue?uid=' + this.uid).toPromise().then(res => {
+          let mydata = res.json();
+          this.dongtaiyue = mydata.dongtai;
+          this.shouyiyue = mydata.tiantian;
+
+        })
+      }
+    })
+  }
+  getName(){
+    this.username=''
+    setTimeout(() => {
+      this.http.get(this.fileService.localUrl+'/action/Users/GetName?un=' + this.AcceptUserId).subscribe(res => {
+        this.username=res.json()
+      },error => {
+        this.username=''
+      })
+    },2000)
+
+  }
+  uidValidator(g:FormGroup):any{
+    let s:FormControl = g.get('AcceptUserId') as FormControl;
+    let c:FormControl = g.get('myuid') as FormControl;
+    console.log(c.value+"111"+s.value)
+
+    let valid:boolean = (s.value!=c.value);
+    console.log(valid)
+    return valid ? null : { thisuid:true };
+  }
+  getSumValidator(g:FormGroup):any{
+    let s:FormControl = g.get('TransferType') as FormControl;
+    let c:FormControl = g.get('MoneySum') as FormControl;
+    if(s.value =="天天奖励"){
+      let w:FormControl = g.get('shouyiyue') as FormControl;
+      let valid:boolean = (c.value<=w.value);
+      //console.log(c.value+'-'+w.value+'-'+valid)
+      return valid ? null : { getSums:true };
+
+    }else if(s.value =="动态奖励"){
+      let w:FormControl = g.get('dongtaiyue') as FormControl;
+      let valid:boolean = (c.value<=w.value);
+      //console.log(c.value+'-'+w.value+'-'+valid)
+      return valid ? null : { getSums:true };
+    }
+
+
+  }
+  showConfirm(password) {
+    this.show = true;
+    let touid = this.myForm.get(['uidGroup','AcceptUserId']).value;
+    let touname =  this.myForm.get('AcceptUserName').value;
+        let confirm = this.alertCtrl.create({
+          title: '',
+          cssClass: 'alertClass',
+          message: '您确定转账吗？',
+          enableBackdropDismiss:false,
+          buttons: [
+            {
+              text: '取消',
+              cssClass: 'canBtn',
+              handler: () => {
+              }
+            },
+            {
+              text: '确定',
+              cssClass: 'sureBtn',
+              handler: () => {
+                this.fileService.showLoading();
+                this.fileService.loading.present().then(() => {
+                  this.http.get(this.fileService.localUrl+'/action/Users/VerifyPass?un=' + this.uid + '&pass=' + password).subscribe(response => {
+
+                    if (response.json()==true) {
+                      //alert(response.json())
+                      //let header = new Headers();
+
+                      let params:object = {
+                          uid:this.uid,
+                          oid:touid,
+                          on:touname,
+                          mt:this.myForm.get(['MoneyGroup','TransferType']).value,
+                          money:parseInt(this.myForm.get(['MoneyGroup','MoneySum']).value)
+                      }
+
+                      //header.append('Content-Type', 'appliction/json');
+                      //alert(params)
+                      this.http.post(this.fileService.localUrl+'/action/JiFenHZ/ZhuanZeng', params).timeout(60000).subscribe(response => {
+                        //alert(response.json())
+                        let successObj: Object;
+                        this.fileService.hideLoading();
+                        if (response.json() == true) {
+                          successObj = {
+                            successImg: 'assets/img/succ.png',
+                            successTitle: '转账成功',
+                            successBtn2: '返回会员中心'
+                          }
+
+                        }
+                        this.myForm.reset();
+                        this.nav.push(SubSuccess, {successObj: successObj});
+                      },error => {
+
+                        if (error.json().Message) {
+                          this.alertCtrl.create({
+                            title: '提示',
+                            subTitle: error.json().Message,
+                            buttons: ['确定'],
+                            cssClass: 'fwh'
+                          }).present();
+                          this.myForm.reset();
+                          this.http.get(this.fileService.localUrl+'/action/Users/GetYue?uid=' + this.uid).toPromise().then(res => {
+                            let mydata = res.json();
+                            this.dongtaiyue = mydata.dongtai;
+                            this.shouyiyue = mydata.tiantian;
+                          })
+                          this.fileService.hideLoading();
+                          return false;
+                        }
+                      });
+
+                    } else {
+                      this.fileService.hideLoading();
+                      this.alertCtrl.create({
+                        title: '密码错误',
+                        subTitle: '请确认是否输入正确的二级密码',
+                        buttons: ['确定'],
+                        cssClass: 'fwh'
+                      }).present();
+                    }
+
+                  });
+                })
+              }
+            }
+          ]
+        });
+        confirm.present();
+
+  }
+  codePopover(myEvent) { //弹出二级密码输入框
+        let popover = this.pop.create(PopovercodePage, {
+          cb: this.showConfirm.bind(this)
+        }, {cssClass: 'codeClass'});
+        popover.present({
+          ev: myEvent
+        });
+  }
+  tojifenList(){
+    this.nav.push(JifenlistPage);
+  }
+
+}

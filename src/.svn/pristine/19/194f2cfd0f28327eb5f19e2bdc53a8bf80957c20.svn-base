@@ -1,0 +1,81 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-navbar></ion-navbar>
+    <ion-title>申请报单中心</ion-title>
+    <ion-buttons end margin-right *ngIf="stateName">
+      <button>
+        <div>{{stateName}}</div>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="jifen">
+<form [formGroup]="myForm">
+<ion-list>
+  <ion-item>
+    <ion-label>姓名</ion-label>
+    <ion-input type="text" value="" placeholder="请输入姓名" formControlName="Name" [(ngModel)]="Name"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>身份证号码</ion-label>
+    <ion-input type="text"  formControlName="IDNumber" placeholder="请输入身份证号" maxLength="18" [(ngModel)]="IDNumber"></ion-input>
+  </ion-item>
+  <div class="error bgf" [hidden]="!myForm.get('IDNumber').dirty">
+    <p no-margin [hidden]="!myForm.hasError('idlength','IDNumber')">
+      <ion-icon name="alert" float-left isActive="false"></ion-icon><span>身份证号不正确</span>
+    </p>
+  </div>
+  <ion-item>
+    <ion-label>联系方式</ion-label>
+    <ion-input type="number" placeholder="请输入手机号码" formControlName="Phone" [(ngModel)]="Phone" ></ion-input>
+  </ion-item>
+  <div class="error bgf" [hidden]="!myForm.get('Phone').dirty">
+    <p no-margin [hidden]="!myForm.hasError('mobile','Phone')">
+      <ion-icon name="alert" float-left isActive="false"></ion-icon><span>请填写正确的手机号码</span>
+    </p>
+  </div>
+  <ion-item>
+    <ion-label>省份</ion-label>
+    <ion-select formControlName="Province" placeholder="请选择省份" okText="确定" cancelText="取消" (ionChange)="ShengChange()">
+      <ion-option *ngFor="let item of dataSheng" value="{{item.id}}|{{item.name}}">{{item.name}}</ion-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>城市</ion-label>
+    <ion-select formControlName="City" placeholder="请选择城市" okText="确定" cancelText="取消" (ionChange)="CityChange()" [disabled]="dataShi.length==0">
+      <ion-option *ngFor="let item of dataShi" value="{{item.id}}|{{item.name}}">{{item.name}}</ion-option>
+    </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-label>地区</ion-label>
+    <ion-select [(ngModel)]="Areas" formControlName="Areas" placeholder="请选择地区" okText="确定" cancelText="取消" [disabled]="dataQu.length==0" (ionChange)="quChange()">
+      <ion-option *ngFor="let item of dataQu" value="{{item.name}}">{{item.name}}</ion-option>
+    </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-label>详细地址</ion-label>
+    <ion-input type="text" placeholder="请输入详细地址"  value="" formControlName="Address" [(ngModel)]="Address"></ion-input>
+  </ion-item>
+  <ion-item no-lines>
+    上传身份证照片
+  </ion-item>
+  <ion-grid class="upImg" padding-left padding-right>
+  <ion-row>
+    <ion-col col-3 (click)="getPicture(0,'Images1')"><img [src]="avatarPath1" width="100%"></ion-col>
+    <ion-col><button ion-button block color="light" (click)="getPicture(0,'Images1')">选择身份证正面照片</button></ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col col-3 (click)="getPicture(0,'Images2')"><img [src]="avatarPath2" width="100%"></ion-col>
+    <ion-col><button ion-button block color="light" (click)="getPicture(0,'Images2')">选择身份证反面照片</button></ion-col>
+  </ion-row>
+  </ion-grid>
+</ion-list>
+
+<div padding>
+  <button ion-button block margin-bottom (tap)="saveAvatar()" [disabled]="myForm.invalid">提交申请</button>
+</div>
+  </form>
+
+</ion-content>

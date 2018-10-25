@@ -1,0 +1,287 @@
+
+.content-ios,.content-md{ background: #f6f7fc}
+  /*list 间距下划线*/
+.list .item-block .item-inner{border-bottom: 1px #c8c7cc solid;}
+.item-ios,.item-md{ padding-right: 16px; font-size: 1.6rem}
+.item-ios.item-block .item-inner,.item-md.item-block .item-inner{ padding-right: 0px; border-color: #ededed;}
+.list > .item-wrapper:last-child .item-block{ border-bottom: 0}
+.list-ios,.list-md{ margin-bottom: 15px}
+.list-ios > .item-block:first-child,.list-md > .item-block:first-child{ border-top: 0}
+.list-ios>.item-block:last-child, .list-ios>.item-wrapper:last-child .item-block{ border-bottom: 1px #d9d9d9 solid}
+
+.label-ios,.label-md{ margin-right: 0; }
+.item-ios .item-button,.item-md .item-button{min-height: 40px;font-size: 1.6rem; height:2.8em}
+
+.picker-toolbar-cancel .picker-button{  color: #222;} //时间选择器取消按钮颜色
+page-pagination .col{ line-height: 28px}
+page-pagination .col span{ width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 10px solid #ff4a02;
+  top:50%;
+  margin-top: -5px;
+  right: 20px;
+  position: absolute;
+}
+.ipad-p{
+  color: #999999; font-size: 14px;
+}
+@media screen and (min-width: 736px) {
+  .ipad-p{
+    color: #999999; font-size: 20px;
+  }
+}
+page-pagination input{width: 80%; background: #fff; border:1px #ccc solid; text-align: center;height:28px}
+page-pagination button{ width: 90%; background: #fff; border: 1px #ccc solid; text-align: center; height: 28px}
+.paginations{ min-height: 40px; padding:5px; position:fixed; bottom:50px}
+.jifen .label-ios,.jifen .label-md{ min-width:100px}
+.jifen ion-label {
+  -webkit-flex: 0 0 100px;
+  -ms-flex: 0 0 100px;
+  flex: 0 0 100px;
+}
+.error{  padding: 0 16px; color: #ff0000; }
+.bgf{background: #fff}
+.error ion-icon{font-size:2rem; margin: -2px 10px 0 0}
+.error p{border-bottom:1px solid #ff4900;min-height: 20px; padding: 10px 0}
+//select下拉框模拟
+.selectClass .popover-content{ width:70%; margin-left:-35%; left: 50% !important; background: #e6e5e1;
+  top:50% !important; margin-top: -12em; border-radius:10px 10px 0 0}
+  .cityClass .popover-content{ width:70%; margin-left:-35%; left: 50% !important; background: #e6e5e1;
+  top:50% !important; margin-top: -12em; border-radius:10px 10px 0 0;max-height:50%;}
+.selectClass .toolbar-title,.cityClass .toolbar-title{ background: #3d3f3e; color: #fff; font-size: 1.6rem; padding: 10px 0}
+.selectClass .popover-arrow,.cityClass .popover-arrow{ display: none}
+.selectClass .item,.cityClass .item{background: #e6e5e1; border-bottom: 1px #b4b4b4 solid}
+.selectClass .list,.cityClass .list{ margin-bottom: 0}
+
+//输入二级密码弹出窗口
+.codeClass .popover-content{ width:100%;  background: #fff;  bottom:0 !important;  border-radius:0;left:0 !important;top: auto !important;}
+.codeClass .popover-arrow{ display: none}
+.codeClass .col{ padding: 0; margin: 1px 1px 0 0}
+.codeClass .row .col:nth-child(3){ margin-right: 0}
+.codeClass .pww{ padding: 0}
+.codeClass .pww button{ margin: 0; font-size:1.8rem; background: #fff; text-align: center;padding: 10px; display: block; color: #000; border-radius: 0}
+.codeClass .pww button.activated{ background: #eee}
+.codeClass .pww .quxiao{background: #eee;}
+.codeClass .pww .quxiao ion-icon{  font-size: 0px}
+.codeClass .pwa{ width:70%; margin: 20px auto;}
+.codeClass .pwa .col{ height: 3em; border-top: 1px #d9d9d9 solid;border-bottom: 1px #d9d9d9 solid; border-right: 1px #d9d9d9 solid; margin: 0;text-align: center; line-height: 3em}
+.codeClass .pwa .col:first-child{ border-left: 1px solid #d9d9d9}
+.codeClass .pwc{ border-bottom: 2px #ff4a02 solid; padding: 15px 0}
+
+.successDiv img{ margin: 50px auto; display: block}
+.successDiv button{ width: 60%; border-radius:2em; margin:30px auto 0}
+
+//tab分类样式
+.segment-ios .segment-button:last-of-type,.segment-ios .segment-button:first-of-type{ border-radius: 0}
+.segment-ios .segment-button div{border-right: 1px solid #e4e4e4; height: 1.8rem}
+.segment-ios .segment-button:last-of-type div{border-right: 0;}
+.toolbar-ios .segment-button{ max-width: 50%; border: none;  font-size: 1.5rem; color: #666;border-bottom: 1px solid #e4e4e4}
+.segment-ios .segment-button.segment-activated{ background: none; color: #ff4a02;border-bottom: 2px solid #ff4a02}
+.help .col span{ position: absolute; border-radius: 50%;  color: #fff; width: 20px; height: 20px; font-size: 1.4rem; text-align: center; line-height: 2rem}
+.help .col .helpwen{background: #6bfffd;}
+.help .col .helpda{background: #ff4a02;}
+.help [col-9]{font-size: 1.5rem; text-overflow: ellipsis; overflow: hidden}
+.help [col-2]{font-size: 1.4rem}
+.lines[no-lines] .item{ border-bottom: 1px #d9d9d9 solid; border-top: 1px #d9d9d9 solid}
+.bggray .myname{ display: inline-block; margin-right: 15px; background: #6bfffd; color: #fff; border-radius: 5px; padding:0 5px}
+.bgred{ color: #ff4a02}
+.bgred .systemname{display: inline-block; margin-left: 15px; background:#ff4a02; color: #fff;border-radius: 5px; padding:0 5px; float: right}
+.hlepitem .label{ margin-top: 5px; margin-bottom: 5px}
+
+.wenti .hasAn{ margin-top:10px; padding-top:5px}
+.wenti ion-label{white-space:inherit}
+.wenti[no-lines] .item{border-bottom: 1px #d9d9d9 solid; border-top: 1px #d9d9d9 solid}
+.wenti .col div{
+  border-right: 2px solid #c9c9c9;
+  border-top: 2px solid #c9c9c9;
+  height: 12px;
+  width: 12px;
+  border-left: 0;
+  border-bottom: 0;
+  position: absolute;
+
+  right: 10px;
+}
+
+.wenti .col .helpxia{
+  top:5px;
+  transform: rotate(135deg);
+  -webkit-transform: rotate(135deg);
+}
+.wenti .col .helpsh{
+  top:15px;
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+}
+.fwh .button-inner{ color: #222; font-size: 1.6rem; font-weight: normal}
+
+.yanzhengButton ion-row{ background: #fff; border-bottom: 1px #d9d9d9 solid; font-size: 1.6rem}
+.yanzhengButton button{ border: 1px #d9d9d9 solid; border-radius: 5px; width: 80%; height: 2.6em; background: none;color: #ff4a02; float: right; margin: 10px 15px 0 0}
+.jihuoButton button{ border: 1px #ff4a02 solid; border-radius: 5px; width: 60%; height: 2em; background: none;color: #ff4a02; float: right;}
+.canlButton button{ border: 1px #ccc solid; border-radius: 5px; width: 30%; height: 2em; background: none;color: #666; float: right;}
+//关系导图
+.guanxi{ background: #fff; padding-top: 30px}
+.guanxiB .jia,.guanxiB .jian{ font-size:2.6rem; color:#ff4a02; text-align: center; margin-top: 5px; overflow: hidden}
+.guanxiB .guanxiBrow{ background: #d9d9d9; border-bottom: 1px #ff4a02 solid; border-bottom: 1px #ccc solid; font-size: 1.5rem}
+//用户中心
+.member_header{
+  background:rgba(0,0,0,0.1);
+  color:white;
+}
+.member_header .toolbar-background-ios{ background: none}
+.member-con .scroll-content{
+  margin-top: 0!important;
+}
+
+.member_header .xiaoxi{ color: #fff; float:right; margin-left: 30px; position: relative;background: none;padding: 0; margin-right: 15px }
+.member_header .shopCart span{
+  position:absolute;
+  color:white;
+  width: 16px;
+  height: 16px;
+  line-height: 16px;
+  overflow: hidden;
+  background:#ff4a02;
+  border-radius: 50%;
+  top:-5px;
+  left: -5px;
+  font-size:1rem;
+  border: 1px #fff solid;
+  text-align: center;
+}
+.member_header .xiaoxi span{
+  position:absolute;
+  background:#ff4a02;
+  border-radius: 50%;
+  top:0;
+  left: 0px;
+
+  width:6px;
+  height:6px;
+
+}
+.member_header .shopCart{float:right; color: #fff;position: relative; background: none; padding:0; margin-right: 1em;}
+
+.memberBg{ width: 100%; background: url("../assets/img/member.png") no-repeat;background-size: 100% 100%; }
+.memberBg .mpembername-wrap{
+  width: 80%;
+  margin: auto;
+  padding-top: 25%;
+  padding-bottom: 10%;
+  text-align: center;
+}
+.memberBg .memberhead{
+  //position: absolute;left:50%; margin-left:-10%;
+  //font-size: 400%;
+  //width: 40px;
+  //height: 50px;
+  height: 54px;
+  width: 54px;
+  vertical-align: middle; display: inline-block;margin: auto 10px auto 0;
+}
+.memberBg .membername{
+  //position: absolute;top: 26%;margin-top: -15px
+  display: inline-block;text-align: center; color: #fff;
+}
+.memberBg .mpembername-wrap .mpembername{
+  display: inline-block;
+  height: 15%;
+  color: #ffffff;
+  text-align: left;
+}
+.memberBg .mpembername-wrap .mpembername p{
+  margin-top: 0;
+}
+.memberData-wrap{
+  border-top: 1px solid rgba(255,255,255,0.3);
+}
+.memberData-wrap .col{
+  padding: 0;
+}
+.memberData-wrap p{
+  margin-top: 10px;
+  margin-bottom: 0;
+}
+.memberData-wrap .font-p{
+  font-size: 12px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+@media screen and (min-width: 736px) {
+    .memberBg .membername{ position: absolute;width: 100%; text-align: center; color: #fff;top: 32%;margin-top: -15px;font-size: 20px }
+}
+@media screen and (max-device-height: 732px) {
+    .memberBg .membername{ position: absolute;width: 100%; text-align: center; color: #fff;top: 29%;margin-top: -15px;font-size: 17px }
+}
+//@media screen and (max-device-height: 1024px) {
+//  .memberBg .membername{ position: absolute;width: 100%; text-align: center; color: #fff;top: 35%;margin-top: -15px;font-size: 24px }
+//}
+.memberData{ background: white; width: 100%; margin: 0px 0 16px 0px; position: relative; z-index: 10;-webkit-box-shadow: 0px 3px 5px #ccc;  box-shadow: 0px 3px 5px #ccc;}
+.memberData .col{ text-align: center}
+.memberData .col p{ border-right: 1px #d9d9d9 solid; margin: 0}
+.memberData .col p:nth-child(even){ margin-bottom: 1em; padding-top: 0.4em}
+.memberData .col p:nth-child(odd){ margin-top: 1em;}
+.memberData .col:last-child p{ border-right: 0}
+.memberOrder{ background: #fff}
+.memberOrder img{ width: 30%; margin: 0 auto; display: block}
+.memberOrder p{ text-align: center; margin: 1em 0 0}
+.memberOrder span{ width: 16px; height: 16px; color:#fff; font-size: 1rem; background: #ff4a02; border-radius: 50%;position: absolute;right:10px; top:5px; text-align: center; line-height: 16px}
+.memberList .item-block { margin: 0.5rem 0;}
+.memberList .m1em{ margin: 1rem 0}
+.memberorderitem{ background: #fff;}
+.memberorderitem .grid{ margin: 0 16px; width: auto; border-top:1px #d9d9d9 solid}
+.memberList button.item .item-inner,.memberorderitem button.item .item-inner{background-position:right 0 center}
+.memberList button{
+  color: #333333;
+}
+.itemspan{ position: absolute; right: 40px; top:50%; margin-top: -0.8rem}
+//关于剧客
+.about{ font-size: 1.6rem; line-height: 2.2rem; text-indent: 2.8rem}
+.about img{ display: block; margin: 0 auto}
+//上传图片
+.upImg{ background: #fff; border-bottom: 1px #d9d9d9 solid}
+.upImg img{ display: block}
+.upImg button{ position: absolute; bottom:5px; background:none; color:#000}
+.liuyan{ width: auto; border: 1px #d9d9d9 solid}
+
+.xiaoxiList .item{ background: #f6f7fc}
+.xiaoxiList ion-item-sliding{ background: #f6f7fc; margin: 15px 0 0 0}
+.xiaoxiList .xiaoxiDiv{ border: 1px #d9d9d9 solid; padding: 15px; background: #fff; margin-top: 5px; position: relative}
+.xiaoxiList .xiaoxiDiv img{ position: absolute; right: -1px; top:-1px;}
+.xiaoxiList .label{ margin-bottom: 0; margin-top: 16px}
+
+#toTop,#toTops{ display: none}
+.toTop{ width: 40px; height:40px; background:rgba(255,255,255,0.5) url("../assets/img/toTop.png") no-repeat; background-size:contain;border-radius: 50%; position: fixed; z-index: 10; bottom:15px; right:15px; }
+.toTop ion-icon{ color: #fff; margin: 0.8rem 0 0 0.8rem}
+// 待发货、待收货的图标
+.huo{
+  font-size:4rem;
+}
+.huohuo{
+  text-align:center;
+}
+.huohuo p{
+  margin-top:0;
+}
+// 我的订单图标
+.myDan{
+  color:#ff4a02;
+}
+
+// 待发货、待收货的上标文字
+.shuliangWenzi{
+  position:absolute;
+  right:20%!important;
+}
+.select-alert .alert-wrapper{ border-radius: 10px 10px 0 0}
+ion-select .select-placeholder{ font-size: 1.4rem}
+.select-alert .alert-head{background: #3d3f3e; padding-bottom: 12px}
+.select-alert .alert-head .alert-title{ font-weight: normal; font-size: 1.6rem; color: #fff; margin-top: 0}
+.select-alert .alert-message:empty{ padding-bottom: 0}
+.select-alert .alert-tappable{background: #e6e5e1; border-bottom: 1px #dbdbdf solid}
+.select-alert .alert-button{border-top: 0; height: 40px; font-size: 1.6rem; color: #333}
+.select-alert .alert-button:last-child{ font-weight: normal; color: #ff4a02}
+
+.item ion-icon[item-start]{ margin-top: 7px}

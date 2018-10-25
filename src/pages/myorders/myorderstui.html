@@ -1,0 +1,47 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-navbar></ion-navbar>
+        <ion-title>退款/售后</ion-title>
+    </ion-toolbar>
+
+</ion-header>
+<ion-content>
+        <ion-list no-lines>
+                <div *ngIf="tuihuo.length > 0">
+                <div *ngFor="let bb of tuihuo;let i=index" class="orderS" >
+                    <div class="tim">{{getTime(bb.ReturnTimes)}}</div>
+                    <div class="orderL">
+
+                        <div class="orderL_one">
+                            <div class="orderL_one1">
+                                <img src="{{bb.Images}}">
+                            </div>
+                            <div class="orderL_one2">
+                                <p>
+                                    <span>{{bb.Title}}</span>
+                                    <span>{{bb.Params}}</span>
+                                </p>
+                                <p>
+                                    <span><i class="icon tubiao">&#xe788;</i>{{bb.Price}}</span>
+                                    <span>x{{bb.Num}}</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                  <div class="orderL_two label-ios-primary tuikuan-state">
+                        <ion-col><span>{{getState[bb.State]}}</span></ion-col>
+                        <button (tap)="chakanState(bb.ODID)" class="ord-queren">查看退款进度</button>
+                  </div>
+
+                </div>
+            </div>
+            <div *ngIf="tuihuo.length <= 0" class="dingdanliang">
+                <i class="icon tubiao">&#xe77a;</i>
+                <p>您暂时没有相关订单！</p>
+            </div>
+        </ion-list>
+    <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="加载中 ...">
+        </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+</ion-content>

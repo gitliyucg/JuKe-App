@@ -1,0 +1,106 @@
+<ion-header>
+  <ion-navbar>
+    <button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>会员注册</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <form [formGroup]="myForm" class="jifen">
+    <ion-list>
+      <ion-item class="has-error">
+        <ion-label>会员账号</ion-label>
+        <ion-input type="text" placeholder="请输入会员账号" formControlName="UserID"></ion-input>
+      </ion-item>
+      <div class="error bgf" *ngIf = "myForm.get('UserID').invalid && myForm.get('UserID').touched && myForm.get('UserID').value != '' ">
+        <p no-margin *ngIf="myForm.get('UserID').invalid && myForm.get('UserID').touched && myForm.get('UserID').value != '' ">
+          <ion-icon name="alert" float-left isActive="false"></ion-icon><span>以字母开头的4-10位英文+数字,不能输入中文</span>
+        </p>
+      </div>
+
+      <ion-item>
+        <ion-label>会员姓名</ion-label>
+        <ion-input type="text" placeholder="请输入会员姓名" formControlName="Name"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>报单数</ion-label>
+        <ion-input type="number" placeholder="不能为0且不能大于{{FuTouDan}}" formControlName="BaoDanSum" [(ngModel)]="BaoDanSum"></ion-input>
+      </ion-item>
+      <div class="error bgf" [hidden] = "!myForm.get('BaoDanSum').dirty">
+      <p no-margin [hidden]="!myForm.hasError('getSums')">
+        <ion-icon name="alert" float-left isActive="false"></ion-icon><span>报单数必须为大于0小于等于{{FuTouDan}}的正整数</span>
+      </p>
+      </div>
+      <ion-item>
+        <ion-label>身份证号码</ion-label>
+        <ion-input type="text" placeholder="请输入身份证号码" formControlName="IDNumber" maxLength="18"></ion-input>
+      </ion-item>
+      <div class="error bgf" [hidden]="!myForm.get('IDNumber').dirty">
+        <p no-margin [hidden]="!myForm.hasError('idlength','IDNumber')">
+          <ion-icon name="alert" float-left isActive="false"></ion-icon><span>身份证号不正确</span>
+        </p>
+      </div>
+      <ion-item>
+        <ion-label>手机号码</ion-label>
+        <ion-input type="number" placeholder="请输入手机号码" formControlName="Mobile" maxLength="11"></ion-input>
+      </ion-item>
+      <div class="error bgf" [hidden]="!myForm.get('Mobile').dirty">
+        <p no-margin [hidden]="!myForm.hasError('mobile','Mobile')">
+          <ion-icon name="alert" float-left isActive="false"></ion-icon><span>请填写正确的手机号码</span>
+        </p>
+      </div>
+      <ion-item>
+        <ion-label>银行类别</ion-label>
+        <ion-select [(ngModel)]="OpeningBank" formControlName="OpeningBank" placeholder="请选择银行" okText="确定" cancelText="取消">
+          <ion-option *ngFor="let item of banks" value="{{item.BankName}}">{{item.BankName}}</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>银行账号</ion-label>
+        <ion-input type="number" placeholder="请输入银行账号" formControlName="BankAccount"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>银行支行</ion-label>
+        <ion-input type="text" placeholder="请输入银行支行" formControlName="BankZhihang"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>一级密码</ion-label>
+        <ion-input type="password" placeholder="请输入一级密码" value="" formControlName="Password"></ion-input>
+      </ion-item>
+      <div class="error bgf" [hidden]="!myForm.get('Password').dirty">
+        <p no-margin [hidden]="!myForm.hasError('pass','Password')">
+          <ion-icon name="alert" float-left isActive="false"></ion-icon><span>一级密码为6-16位的字母和数字，不能使用特殊字符</span>
+        </p>
+      </div>
+      <ion-item>
+        <ion-label>二级密码</ion-label>
+        <ion-input type="password" placeholder="请输入二级密码(6位数字)" value="" formControlName="SecondaryPassword"></ion-input>
+      </ion-item>
+      <div class="error bgf" [hidden]="!myForm.get('SecondaryPassword').dirty">
+        <p no-margin [hidden]="!myForm.hasError('pass','SecondaryPassword')">
+          <ion-icon name="alert" float-left isActive="false"></ion-icon><span>二级密码为6位数字</span>
+        </p>
+      </div>
+      <ion-item>
+        <ion-label>推荐人账号</ion-label>
+        <ion-input type="text" placeholder="请输入推荐人账号" formControlName="RefereeMobile" [(ngModel)]="RefereeMobile"></ion-input>
+      </ion-item>
+      <ion-item no-lines>
+        <ion-label>报单中心</ion-label>
+        <ion-input type="text" readonly="true" formControlName="BanDanCenter" [(ngModel)]="BanDanCenter"></ion-input>
+      </ion-item>
+    </ion-list>
+
+    <div padding>
+      <button ion-button block type="submit" [disabled]="myForm.invalid || show" (tap)="saveForm($event)">注册</button>
+    </div>
+    <div padding-left padding-right padding-bottom>
+      <button ion-button block color="gray" type="reset">重置</button>
+    </div>
+  </form>
+</ion-content>

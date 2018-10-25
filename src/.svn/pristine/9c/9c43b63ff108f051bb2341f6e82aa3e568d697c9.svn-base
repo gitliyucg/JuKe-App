@@ -1,0 +1,152 @@
+
+.orderS{
+    background:white;
+    margin-bottom:15px;
+}
+// 图片行
+.orderL_one{
+    display:flex;
+    justify-content: space-between;
+    border-bottom:1px solid #e4e4e4;
+    padding: 15px;
+}
+.orderL_one1{
+    width:40%;
+}
+.orderL_one1 img{ display: block}
+.orderL_one2{
+    width:60%;
+    position:relative;
+    margin-left: 15px;
+}
+.orderL_one2 p:nth-child(1){
+   position:absolute;
+   margin:0;
+   width:100%;
+   display:flex;
+   font-size:1.4rem;
+   justify-content: flex-start;
+   flex-wrap: wrap;
+}
+.orderL_one2 p:nth-child(1) span{
+   display:block;
+   width:100%;
+   margin-bottom:10px;
+}
+.orderL_one2 p:nth-child(1) span:nth-of-type(2){
+  color:rgba(0,0,0,0.7);
+  font-size:1.4rem;
+}
+.orderL_one2 p:nth-child(2){
+   position:absolute;
+   bottom:0;
+   margin:0;
+   width:100%;
+   display:flex;
+   font-size:1.6rem;
+   justify-content: space-between;
+}
+.orderL_one2 p:nth-child(2) i{font-size: 1.6rem}
+// 文字行
+.orderL_two{
+    border-top: 5px solid #f6f7fc;
+    padding: 10px 15px;
+    display:flex;
+    justify-content: space-between;
+    border-bottom:1px solid #e4e4e4;
+}
+
+.orderL_two>div:nth-child(2)>span{float: left}
+
+.orderL_two>div:nth-child(2)>span:last-child i{
+    font-size:1.6rem;
+  float: left;
+}
+// 第三行
+.orderL_three{
+    display:flex;
+    justify-content: flex-end;
+    padding:15px;
+}
+.orderL_three button,.tuikuan-state button{
+
+    border-radius:3px;
+    padding:8px 15px;
+    background: #fff;
+  margin-left: 10px;
+
+}
+.orderL_three .ord-queren,.tuikuan-state .ord-queren{ border: 1px solid #f96429; color: #f96429}
+.orderL_three .ord-quxiao,.tuikuan-state .ord-quxiao{ border: 1px solid #999; color: #000}
+// 返回首页
+.backShouYe{
+    position:fixed;
+    top:5px;
+    right:5px;
+    text-align:center;
+    font-size:1.4rem;
+    background:none;
+    color:black;
+    padding:10px 5px;
+}
+.tim{
+    padding:15px 15px 0;
+}
+.dingdanliang{
+    width:100%;
+    text-align:center;
+    padding-top:10%;
+}
+.dingdanliang i{
+   font-size:12rem;
+   color:#f96429;
+   margin:0;
+
+}
+.dingdanliang p{
+    text-align:center;
+    margin:0;
+    font-size:1.8rem;
+    text-indent:5%;
+    color:rgba(0,0,0,0.7);
+}
+ion-footer{ border-top: 1px #ccc solid}
+.orderInfo .orderL_three{ border-top: 1px #eee solid}
+.orderInfo .order-goods{ margin-bottom: 5px}
+.orderInfo .order-goods img{ display: block;}
+.orderInfo .order-goods .col{ padding: 0; position: relative}
+.orderInfo i{ font-size:1.5rem}
+.orderInfo .order-goods [col-4]{ margin-right: 10px}
+.orderInfo .order-goods p{ margin: 5px 0}
+.orderInfo .order-goods .order-goods-pr{ position: absolute; bottom: 0;left: 0; width: 100%}
+.tuikuangBtn{ width: 30%; margin: 0 auto; padding: 20px; border-radius: 0; color: #333}
+.order-state [col-4] .item{ margin-left: -16px}
+.order-state .item .radio{ border: 1px #666 solid; border-radius: 50%; width: 20px; height: 20px}
+.order-state .item-radio-checked .radio{ border: 1px #fc4902 solid; background: #fc4902}
+.order-state .item .radio-checked .radio-inner{ top:2px; border-color: #fff }
+.order-state .col{ padding: 0}
+.order-state .list .item-block .item-inner{ border: none}
+.tuikuan-stateS .yuan{ width: 40px; height: 40px; border-radius: 50%; border: 2px #ccc solid;position: relative; overflow:hidden; margin:0 auto}
+.tuikuan-stateS .yuan span{
+  left: 15px;
+  top: -5px;
+  position: absolute;
+  width: 15px;
+  height: 30px;
+  border-width: 2px;
+  border-top-width: 0;
+  border-left-width: 0;
+  border-style: solid;
+  border-color: #ccc;
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);}
+.tuikuan-stateS .act .yuan span{border-color: #21a513;}
+.tuikuan-stateS .act .yuan{border: 2px #21a513 solid;}
+.tuikuan-stateS .act .hen{ background: #21a513}
+.tuikuan-stateS .hen{ height: 2px; background: #ccc; overflow: hidden; margin-top: 20px}
+.tuikuan-stateS .hen1{margin-left: -100%}
+.tuikuan-stateS .hen2{margin-right: -100%}
+
+.tuikuan-text{ text-align: center}
+.tuikuan-state .col{padding: 0}
+.tuikuan-state .col button{ position: absolute; right: 0; top:-6px}

@@ -1,0 +1,49 @@
+<!--
+  Generated template for the RechargesPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header class="tian-head header">
+  <ion-toolbar>
+    <ion-navbar class="tian-back"></ion-navbar>
+    <ion-title class="tian">天天奖励</ion-title>
+    <ion-buttons end margin-right>
+      <button (click)="toPage(recharageslistPage)">
+        <div style="color: white">记录</div>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-row class="beijing">
+    <ion-list class="yue">
+      <p class="yue1">天天奖励余额</p>
+      <p class="yue2">{{Shouyi}}</p>
+    </ion-list>
+  </ion-row>
+  <ion-row class="fanli">
+    <ion-col>
+      <p class="shuzi">{{TouZiBonus}}</p>
+      <p class="zi">天天奖励</p>
+    </ion-col>
+    <ion-col>
+      <p class="shuzi">{{ShopBonus}}</p>
+      <p class="zi">天天返利</p>
+    </ion-col>
+  </ion-row>
+  <ion-list no-lines class="memberList">
+    <button ion-item (click)="toPage(chargePage)">
+      <ion-icon item-start>
+        <img src="assets/img/26023196679102474.png" alt="" width="17px">
+      </ion-icon>
+      充值
+    </button>
+    <button ion-item (click)="toPage(carryPage)">
+      <ion-icon item-start>
+        <img src="assets/img/326208169993971873.png" alt="" width="17px">
+      </ion-icon>
+      提现
+    </button>
+  </ion-list>
+</ion-content>

@@ -1,0 +1,14 @@
+{
+  "name": "app",
+  "app_id": "",
+  "type": "ionic-angular",
+  "proxies": [
+    {
+      "path": "/action",
+      "proxyUrl": "http://action.hxig.cn/action"
+    }
+  ],
+  "integrations": {
+    "cordova": {}
+  }
+}

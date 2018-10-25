@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-navbar>
+        <ion-title>退款/售后</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content class="orderInfo">
+    <ion-list padding>
+      <ion-row><span class="mr15">服务单号</span><span>{{id}}</span></ion-row>
+      <ion-row><span class="mr15">申请时间</span><span>{{ReturnTimes}}</span></ion-row>
+    </ion-list>
+  <ion-list padding>
+    <ion-row><span class="mr15">退还积分</span><span><i class="icon tubiao">&#xe788;</i>{{Price}}</span></ion-row>
+  </ion-list>
+  <ion-list class="tuikuan-state" padding>
+    <ion-row>
+      <ion-col>
+        <span class="mr15">审核状态</span><span>{{getState[State]}}</span><button class="ord-queren" (tap)="quxiao()">取消申请</button>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="State==1">
+      <ion-col><span class="mr15" >拒绝原因</span><span>{{ReturnMess}}</span></ion-col>
+    </ion-row>
+  </ion-list>
+  <ion-list padding>
+    <ion-row><span class="mr15">退款原因</span><span>{{Reason}}</span></ion-row>
+    <ion-row *ngIf="Message"><span class="mr15">退款说明</span><span>{{Message}}</span></ion-row>
+  </ion-list>
+<ion-list class="tuikuan-stateS" padding>
+  <ion-row>
+    <ion-col col-4 class="act"><div class="yuan"><span></span></div></ion-col>
+    <ion-col class="act"><div class="hen hen1"></div></ion-col>
+    <ion-col [class.act]="State<5&&State>0"><div class="yuan"><span></span></div></ion-col>
+    <ion-col [class.act]="State<5&&State>0"><div class="hen hen2"></div></ion-col>
+    <ion-col col-4 [class.act]="State==4"><div class="yuan"><span></span></div></ion-col>
+  </ion-row>
+  <ion-row class="tuikuan-text">
+    <ion-col>提交申请</ion-col>
+    <ion-col>卖家审核</ion-col>
+    <ion-col>退款成功</ion-col>
+  </ion-row>
+</ion-list>
+  <ion-list class="tuikuan-state" padding>
+    <ion-row><ion-col><span class="mr15">退货地址</span><span class="label-ios-primary">{{ReturnAddress}}</span></ion-col></ion-row>
+    <ion-row padding-top><ion-col><button style="margin-top: 3rem" class="ord-quxiao" (tap)="wuliu()" float-right>填写物流信息</button></ion-col></ion-row>
+  </ion-list>
+
+
+</ion-content>
+

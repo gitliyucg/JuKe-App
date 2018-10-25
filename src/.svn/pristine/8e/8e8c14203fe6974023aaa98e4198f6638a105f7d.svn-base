@@ -1,0 +1,110 @@
+.gouback{
+    margin-top:10px;
+}
+.yixuan-content{
+  position:relative;
+  background:#f1f1f1;
+}
+//删除
+.delete{
+
+    width:100%;
+    background:#e5e5e5;
+    position:fixed;
+    bottom:0;
+    left:0;
+    padding: 15px 0;
+  overflow: hidden;
+}
+.delete button{
+    background:black;
+    color:white;
+    position:absolute;
+    right: 0;
+    bottom:0;
+    width:32%;
+    text-align: center;
+    font-size:1.6rem;
+    padding: 15px 0;
+  height:100%;
+  overflow: hidden;
+}
+//提交订单
+.tijiao{
+
+    width:100%;
+    background:#e5e5e5;
+    position:fixed;
+    bottom:0;
+    left:0;
+    padding: 15px 16px;
+  overflow: hidden;
+
+}
+.tijiao i{
+    font-size:1.6rem;
+    margin-left:10px;
+}
+.tijiao span{
+    font-size:1.6rem;
+}
+.tijiao .cart-span{
+  color:white;
+  position:absolute;
+  right: 0;
+  bottom:0;
+  width:32%;
+  text-align: center;
+  font-size:1.6rem;
+  padding: 15px 0;
+  height:100%;
+  overflow: hidden;
+}
+
+
+//全选
+.quanxuan{
+    width:100%;
+    background:white;
+    margin-top:10px;
+    display: flex;
+    align-items: center;
+}
+.quanxuan span:nth-child(1){
+      display:inline-block;
+    padding:6px;
+    width:20px;
+    height:20px;
+    background:#fd4c06;
+    background-clip:content-box;
+    border: 1px solid black;
+}
+.quanxuan span:nth-child(2){
+    margin-left:10px;
+    font-size:1.4rem;
+}
+
+//当购物车为空的时候
+.guesslike{
+    padding:10px;
+}
+.goutoshopping{
+    background:#fd4c06;
+    width:65%;
+    padding:10px;
+    color:white;
+    font-size:1.4em;
+    margin:0 auto;
+    text-align:center;
+    border-radius:30px;
+    margin-top:10%;
+}
+.kong_tishi{   // 购物车为空提示文字
+    text-align: center;
+    font-size:2rem;
+}
+.kongCarts img{
+    display:block;
+    width:40%;
+    margin:30px auto;
+}

@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-navbar>
+    <button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>{{pageTitle}}</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-list no-lines class="memberList">
+    <button ion-item *ngFor="let item of lists" (tap)="toNewPage(item.url)">
+        <ion-icon name="{{item.icon}}" item-start></ion-icon>
+        {{item.name}}
+  </button>
+  </ion-list>
+  <div padding *ngIf="pageTitle=='设置'">
+    <button block ion-button color="gray" (tap)="loginOut()">退出登录</button>
+  </div>
+</ion-content>

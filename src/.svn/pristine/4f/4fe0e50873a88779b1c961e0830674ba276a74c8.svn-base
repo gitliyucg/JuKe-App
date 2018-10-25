@@ -1,0 +1,86 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-navbar></ion-navbar>
+    <ion-title>积分互转</ion-title>
+    <ion-buttons end margin-right>
+      <button (click)="tojifenList()">
+        <div>记录</div>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="jifen">
+  <form [formGroup]="myForm">
+
+    <ion-list>
+      <div formGroupName="MoneyGroup">
+      <ion-item>
+        <ion-label>天天奖励</ion-label>
+        <ion-input type="number" value="{{shouyiyue}}" readonly="true" formControlName="shouyiyue"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>动态奖励</ion-label>
+        <ion-input type="number" value="{{dongtaiyue}}" readonly="true"></ion-input>
+      </ion-item>
+      <input type="hidden" formControlName="dongtaiyue" [(ngModel)]="dongtaiyue">
+      <input type="hidden" formControlName="shouyiyue" [(ngModel)]="shouyiyue">
+      <ion-item>
+        <ion-label>交易数额</ion-label>
+        <ion-input type="number" placeholder="请输入正整数" formControlName="MoneySum" value=""></ion-input>
+      </ion-item>
+      <div [hidden]="myForm.get(['MoneyGroup','MoneySum']).untouched" class="error bgf">
+        <div *ngIf="!myForm.hasError('required',['MoneyGroup','MoneySum'])">
+          <p [hidden]="!myForm.hasError('intNum',['MoneyGroup','MoneySum'])" no-margin>
+            <ion-icon name="alert" float-left isActive="false"></ion-icon><span>交易数额必须是正整数</span>
+          </p>
+        </div>
+        <div *ngIf="myForm.get(['MoneyGroup','TransferType']).value&&myForm.get(['MoneyGroup','TransferType']).value=='天天奖励'">
+          <div *ngIf="!myForm.hasError('required',['MoneyGroup','MoneySum'])&&!myForm.hasError('intNum',['MoneyGroup','MoneySum'])">
+            <p [hidden]="myForm.get(['MoneyGroup','MoneySum']).value<=shouyiyue" no-margin>
+              <ion-icon name="alert" float-left isActive="false"></ion-icon><span>交易数额必须小于天天奖励余额</span>
+            </p>
+          </div>
+        </div>
+        <div *ngIf="myForm.get(['MoneyGroup','TransferType']).value&&myForm.get(['MoneyGroup','TransferType']).value=='动态奖励'">
+          <div *ngIf="!myForm.hasError('required',['MoneyGroup','MoneySum'])&&!myForm.hasError('intNum',['MoneyGroup','MoneySum'])">
+            <p [hidden]="myForm.get(['MoneyGroup','MoneySum']).value<=dongtaiyue" no-margin>
+              <ion-icon name="alert" float-left isActive="false"></ion-icon><span>交易数额必须小于动态奖励余额</span>
+            </p>
+          </div>
+        </div>
+      </div>
+      <ion-item>
+        <ion-label>转账类型</ion-label>
+        <ion-select [(ngModel)]="jifenType" formControlName="TransferType" placeholder="请选择转账类型" okText="确定" cancelText="取消">
+          <ion-option value="天天奖励">天天奖励</ion-option>
+          <ion-option value="动态奖励">动态奖励</ion-option>
+          <!--<ion-option value="报单金额">报单金额</ion-option>-->
+        </ion-select>
+        <!--ion-input type="text" formControlName="TransferType" readonly="true" value="{{jifenType}}" (click)="selectPopover($event)"
+          placeholder="请选择转账类型"></ion-input-->
+      </ion-item>
+      </div>
+      <ion-item formGroupName="uidGroup">
+        <ion-label>接受会员ID</ion-label>
+        <ion-input type="text" placeholder="请输入对方ID号" formControlName="AcceptUserId" (input)="getName()" [(ngModel)]="AcceptUserId"></ion-input>
+        <input type="hidden" formControlName="myuid" [(ngModel)]="uid">
+      </ion-item>
+      <div *ngIf="myForm.get(['uidGroup','AcceptUserId']).dirty" class="error bgf">
+          <p *ngIf="myForm.get(['uidGroup','AcceptUserId']).value==uid" no-margin>
+            <ion-icon name="alert" float-left isActive="false"></ion-icon><span>交易对象不能是自己</span>
+          </p>
+      </div>
+      <ion-item>
+        <ion-label>会员姓名</ion-label>
+        <ion-input type="text" placeholder="输入对方ID自动匹配姓名" formControlName="AcceptUserName" readonly="true" [(ngModel)]="username"></ion-input>
+
+      </ion-item>
+    </ion-list>
+
+    <div padding>
+      <button ion-button block margin-bottom (tap)="codePopover($event)" [disabled]='myForm.invalid || show'>转账</button>
+    </div>
+  </form>
+</ion-content>

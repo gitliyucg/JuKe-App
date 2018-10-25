@@ -1,0 +1,164 @@
+import { Component } from '@angular/core';
+import { NavController, NavParams, ToastController } from 'ionic-angular';
+import { QueRen } from '../querendingdan/querendingdan';
+import { Http } from '@angular/http';
+import {FileService} from "../../share/fileService";
+import {MyApp} from "../../app/app.component";
+
+
+@Component({
+  templateUrl: 'shoppingcart.html'
+})
+export class ShoppingCart {
+  uid;    // 用户id
+  shujus: Array<any>; // 服务器里保存的用户购物车数据
+  myVar: string;   // 右上角“编辑”和“完成的切换”
+  buy: boolean;   // 是否决定购买
+  finally: object[];   // 决定付款的最终商品数据
+  totalPrice: number;  // 决定付款的最终商品的总钱数
+  allbuy = true;        // 判断是否为全选状态
+  backgroundcolor: string;   // 控制图片前的点
+  tiao;  // 判断进入当前页面的方式：加入购物车还是立即兑换
+  thisallbuy =[];
+  constructor(
+
+    public navParams: NavParams,
+    public nav: NavController,
+    public http: Http,
+    private toastCtrl: ToastController,
+    private file:FileService
+  ) {
+    this.uid = navParams.data.uid;
+    this.tiao = navParams.data.tiao;
+    this.totalPrice = 0
+    // 获取产品数据(上一页获取的购物车数据)
+    this.shujus = navParams.data.items;
+    for (let i = 0; i < this.shujus.length; i++) {
+      this.shujus[i].buy = true;  // 为购物车数据添加属性
+      this.shujus[i].tishi2 = false;
+    }
+    // 判断购物车是否有产品，进行相应的显示
+    if (this.shujus.length > 0) {
+      this.myVar = '编辑';  // 购物车不为空时
+    } else {
+      this.myVar = '添加';  // 购物车为空时
+    }
+
+    this.finally = [];
+    this.zongjia();
+  }
+  bianji(myVar) {   //控制编辑、完成按钮的切换
+    if (myVar == '编辑') {
+      this.myVar = '完成';  // 编辑购物车（删除产品）
+      this.zongjia();
+      return false;
+    }
+    if (myVar == '完成') {
+      this.myVar = '编辑';
+      this.zongjia();
+      return false;
+    }
+  }
+  zongjia() {   // 计算最终结账总付费额
+    this.thisallbuy = [];
+    this.totalPrice = 0;
+    for (var i = 0; i < this.shujus.length; i++) {
+      if (this.shujus[i].buy) {
+        //console.log(this.shujus[i].buy)
+        this.totalPrice += this.shujus[i].Price * this.shujus[i].Num;
+        this.thisallbuy.push('1');
+      }
+      //console.log(this.shujus[i].buy)
+    }
+    if (this.thisallbuy.length == this.shujus.length) {
+      this.allbuy = true;
+    } else {
+      this.allbuy = false;
+    }
+    //console.log(this.thisallbuy)
+  }
+  allselect() {   // 全选
+    if (this.allbuy) {
+      for (var i = 0; i < this.shujus.length; i++) {
+        this.shujus[i].buy = false;
+      }
+      this.backgroundcolor = '#fff';
+      this.allbuy = false;
+    } else {
+      for (var i = 0; i < this.shujus.length; i++) {
+        this.shujus[i].buy = true;
+      }
+      this.backgroundcolor = '#fd4c06';
+      this.allbuy = true;
+    }
+    this.zongjia();
+  }
+  tijiao(uid, tiao) {   //跳转到确认订单
+    var pass = [];  // 用来存储buy为true的
+    var shuju2 = [];// 用来存储buy为true的数据
+
+    for (let i in this.shujus) {
+      var obj = { pid: '', num: '', cid: '' };
+      if (this.shujus[i].buy == true && this.shujus[i].Num > 0) {
+        obj.pid = this.shujus[i].ParamID;
+        obj.num = this.shujus[i].Num;
+        obj.cid = this.shujus[i].ID;
+        pass.push(obj)
+        shuju2.push(this.shujus[i])
+      }
+    }
+    if (pass.length > 0) { // 上传购物车购买数据
+      this.http.post(this.file.localUrl + '/action/ShopCars/ValidNum', pass).subscribe(data => {
+        if (data.json() === true) {
+          this.nav.push(QueRen, { shuju2, tiao })
+        } else {
+          this.presentToast2()
+          let arr = JSON.parse(data.json());
+          for (let k = 0; k < this.shujus.length; k++) {
+            for (let j = 0; j < arr.length; j++) {
+              if (arr[j].cid == this.shujus[k].ID) {
+                this.shujus[k].Num = arr[j].size
+              }
+            }
+          }
+        }
+      },error => {
+        alert('出现问题了，请检查网络或重新打开APP')
+      })
+    }
+  }
+  shanchu() {   // 删除购物车里的数据
+    let dshuju = [];
+    for (let i = 0; i < this.shujus.length; i++) {    // 便利数据，获得有效产品的ID
+      if (this.shujus[i].buy == true) {
+        dshuju.push(this.shujus[i].ID);
+      }
+    }
+    this.http.delete(this.file.localUrl +'/action/ShopCars/DList?ids=' + dshuju)
+      .toPromise().then(response => {
+        this.http.get(this.file.localUrl +'/action/ShopCars/GetList?uid=' + this.uid).toPromise().then(res => {
+          this.shujus = res.json();
+          this.zongjia();
+          if (this.shujus.length == 0) {   // 若购物车为空，等10毫秒显示购物车为空页面
+            setTimeout(() => {
+              this.myVar = '添加'
+            }, 10);
+          }
+        })
+      })
+  }
+  goushopping() {   // 跳到商城首页
+    this.nav.push(MyApp);
+  }
+  presentToast2() {    // 库存不足提示
+    let toast = this.toastCtrl.create({
+      message: '您所提交的商品 库存已不足',
+      duration: 2000,
+      position: 'middle',
+      cssClass: 'toastClass'
+    });
+    toast.onDidDismiss(() => {
+    });
+    toast.present();
+  }
+}

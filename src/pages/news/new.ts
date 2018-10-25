@@ -1,0 +1,78 @@
+import { Component,ViewChild } from '@angular/core';
+import { Injectable } from '@angular/core';
+import { Http } from '@angular/http';
+import { NavParams } from "ionic-angular";
+import {Content } from 'ionic-angular';
+import {FileService} from "../../share/fileService";
+@Injectable()
+
+@Component({
+	template: `
+    <ion-header>
+      <ion-navbar>
+        <button menuToggle>
+          <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>{{contentTit}}</ion-title>
+      </ion-navbar>
+    </ion-header>
+    <toTop [viewCon]="content" id="toTops"></toTop>
+    <ion-content (ionScroll)="scrollHandler($event)">
+      <div class="newCon" padding>
+      <h2>{{title}}</h2>
+      <p class="label-ios-deepgray" *ngIf="time">{{getTime(time)}}</p>
+      <div [innerHTML]="contentCon"></div>
+      </div>
+    </ion-content>
+  `
+})
+
+export class NewPage {
+  @ViewChild(Content) content:Content;
+  id=this.navParams.get('id');
+  type=this.navParams.get('type');
+  contentTit:string;
+  contentCon:string;
+  title:string;
+  time:string;
+  showKey:boolean=true; //防止滚动条事件一直执行
+	constructor(private http: Http,private navParams:NavParams,private file:FileService) {
+	  if(this.type=="xiaoxi"){
+      this.contentTit="通知内容";
+      this.http.get(this.file.localUrl + '/action/MessageLists/GetMessageList/'+this.id).toPromise()
+        .then(response => {
+          let mydata = response.json();
+          this.contentCon= mydata.SendContent;
+          this.time = mydata.SendDate;
+          this.title= mydata.SendTitle;
+        });
+    }else if(this.type=="news"){
+      this.contentTit="新闻内容";
+      this.http.get(this.file.localUrl + '/action/News/GetView/'+this.id).toPromise()
+        .then(response => {
+          let mydata = response.json();
+          this.contentCon= mydata.Contents;
+          this.time = mydata.Times;
+          this.title= mydata.Title;
+        });
+    }
+
+	}
+  getTime(time){
+    if(time) {
+      return time.split('T')[0];
+    }
+
+  }
+  scrollHandler(event){  //滚动控制返回顶部按钮
+
+    if(this.content.scrollTop>400&&this.showKey){
+      this.showKey = false;
+      document.getElementById('toTops').style.display="block";
+    }else if(this.content.scrollTop<400&&!this.showKey){
+      this.showKey = true;
+      document.getElementById('toTops').style.display="none";
+    }
+
+  }
+}

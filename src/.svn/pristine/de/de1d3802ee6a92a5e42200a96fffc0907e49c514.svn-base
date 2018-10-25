@@ -1,0 +1,159 @@
+import { Component } from '@angular/core';
+
+import { ShezhiPage } from '../shezhi/shezhi';
+import { CaiwuPage } from '../caiwu/caiwu';
+import { FileService } from "../../share/fileService";
+import { TuiGuangPage } from "../tuiguang/tuiguang";
+import { Storage } from '@ionic/storage';
+import { Http } from "@angular/http";
+import { BaodanPage } from "../caiwu/baodan";
+import { XiaoxiPage } from "../news/xiaoxi";
+import { MyOrders } from "../myorders/myorders";
+import { ShoppingCart } from "../shoppingcart/shoppingcart";
+import { App, Platform, AlertController } from "ionic-angular";
+import { MyOrderstui } from "../myorders/myorderstui";
+import { AppVersion } from '@ionic-native/app-version';
+import { HomePage } from "../home/home";
+import { NavController } from 'ionic-angular';
+
+
+@Component({
+  templateUrl: 'member.html'
+})
+
+export class MemberPage {
+
+  isBaodan:number;
+  numDfh: number;
+  numDsh: number;
+  numSh: number;
+  userid: string;
+  shouyitoday: string;
+  dongtaitoday: string;
+  shouyizonge: string;
+  dongtaizonge: string;
+  baodanzonge: string;
+  baodanPage: any = BaodanPage;
+  caiwuPage: any = CaiwuPage;
+  tuiguangPage: any = TuiGuangPage;
+  shezhiPage: any = ShezhiPage;
+  xiaoxiPage: any = XiaoxiPage;
+  ShoppingCart: any = ShoppingCart;
+  number: number;// 用来显示购物车物品数量
+  xiaoxinum = [];
+  // 点击购物车图标跳转到购物车页面需要的数据
+  datas;
+  myOrderInType: string;
+  name:string;
+  private alertCtrl: any;
+  constructor(
+    private fileService: FileService,
+    private storage: Storage,
+    private http: Http,
+    private app:App,
+    alertCtrl:AlertController,
+    private platform: Platform,
+    public appVersion:AppVersion,
+    public nav: NavController
+) {
+
+    //判断版本是否更新
+
+    this.http.get(this.fileService.localUrl + '/action/Versions/GetNewest').subscribe(response => {
+
+        let mydata = response.json();
+        let ver = mydata.Version;
+        ver = parseInt(ver);
+        console.log(ver);
+
+        appVersion.getVersionCode().then(value => {
+            let thisv = parseInt(value)
+            if(ver == 103) {
+              alert("发现新版本，请前往更新");
+              this.nav.push(HomePage);
+            }
+        })
+
+    })
+
+  }
+
+ionViewDidEnter() {
+
+    this.myOrderInType = "会员中心";
+    this.storage.get('userStorage').then(value => {
+      if (value!==null&&value!=='undefined'&&value!=='') {
+      this.userid = value.userid;
+      this.name = value.Name;
+      this.isBaodan = value.isBaodan;
+      this.http.get(this.fileService.localUrl+'/action/users/getuserindex/' + value.uid).subscribe(res => {
+        let mydata = res.json();
+        let qianbao = JSON.parse(mydata.qianbao);
+        let bonus = JSON.parse(mydata.bonus);
+        this.shouyitoday = bonus.Balance;
+        this.baodanzonge = qianbao.RegBalance;
+        this.dongtaitoday = bonus.DongTaiBonus;
+        this.shouyizonge = qianbao.Balance;
+        this.dongtaizonge = qianbao.JlBalance;
+
+      },error => {
+        alert('出现问题了，请检查网络或重新打开APP')
+        this.platform.exitApp();
+      })
+        this.http.get(this.fileService.localUrl + '/action/MessageLists/GetList?un=' + this.userid + '&num=1').subscribe(response => {
+          let mydata = response.json();
+          this.xiaoxinum = JSON.parse(mydata.data);
+        });
+      this.http.get(this.fileService.localUrl+'/action/Orders/GetOrderSize/' + value.uid).subscribe(res => {
+        let mydata = res.json();
+        this.numDfh = mydata.fahuo;
+        this.numDsh = mydata.shouhuo;
+        this.numSh = mydata.shouhou;
+
+      })
+      // 获取购物车数据
+      this.http.get(this.fileService.localUrl+'/action/ShopCars/GetList?uid=' + value.uid).subscribe(res => {
+        let productParam = res.json();
+        this.datas={};
+        if (productParam) {
+          // 显示购物车里有多少物品
+          // 为防止有负数产品
+          let shujuzhengli = res.json();
+          let shujuzhengli2 = [];
+          for (let i = 0; i < shujuzhengli.length; i++) {
+            if (shujuzhengli[i].Num > 0) {
+              shujuzhengli2.push(shujuzhengli[i])
+            }
+          }
+          this.number = shujuzhengli2.length;
+          this.datas.items = shujuzhengli2;
+        }
+          this.datas.tiao= "加入购物车";
+          this.datas.uid=value.uid;
+      })
+      }
+    })
+
+  }
+  // toCaiwuPage(url){
+  //   this.nav.push(url);
+  // }
+
+  toMemberPage(url){
+    this.app.getRootNav().push(url);
+  }
+  toShopCart(){
+    //console.log(this.datas)
+    this.app.getRootNav().push(ShoppingCart,this.datas);
+  }
+  toOrder(ob){
+    if(ob.state===6){
+      this.app.getRootNav().push(MyOrderstui);
+    }else{
+      this.app.getRootNav().push(MyOrders,ob);
+    }
+
+
+  }
+
+}

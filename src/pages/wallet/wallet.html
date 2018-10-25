@@ -1,0 +1,127 @@
+<!--
+  Generated template for the WalletPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>我的钱包</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <div class="walletList" (click)="gotoPages(baodanPage)">
+    <div class="walletList-icon">
+      <ion-icon name="baodanzhongxin"></ion-icon>
+    </div>
+    <div class="walletList-integral">
+      <p>
+        <span>报单金额</span>
+        <span>{{integralArr['RegBalance'] | number:'1.2-2'}}</span>
+      </p>
+    </div>
+    <div class="walletList-detailed">
+      <p>更多</p>
+    </div>
+  </div>
+
+  <div class="walletList to-top" (click)="gotoPages(rechargesPage)">
+    <div class="walletList-icon">
+      <ion-icon name="jiangli"></ion-icon>
+    </div>
+    <div class="walletList-integral">
+      <p>
+        <span>天天奖励</span>
+        <span>{{integralArr['tiantian'] | number:'1.2-2'}}</span>
+      </p>
+    </div>
+    <div class="walletList-detailed">
+      <p>更多</p>
+    </div>
+  </div>
+
+  <div class="walletList to-top" (click)="gotoPages(dynamicPage)">
+    <div class="walletList-icon">
+      <ion-icon name="guquantouzi"></ion-icon>
+    </div>
+    <div class="walletList-integral">
+      <p>
+        <span>动态奖励</span>
+        <span>{{dongtai | number:'1.2-2'}}</span>
+      </p>
+    </div>
+    <div class="walletList-detailed">
+      <p>更多</p>
+    </div>
+  </div>
+
+  <div class="walletList to-top" (click)="gotoPages(consumptionPage)">
+    <div class="walletList-icon">
+      <ion-icon name="gouwu"></ion-icon>
+    </div>
+    <div class="walletList-integral">
+      <p>
+        <span>购物积分</span>
+        <span>{{gouwu | number:'1.2-2'}}</span>
+      </p>
+    </div>
+    <div class="walletList-detailed">
+      <p>更多</p>
+    </div>
+  </div>
+
+  <!---->
+  <div class="walletList to-top" (click)="gotoPages(guquanfundPage)">
+    <div class="walletList-icon">
+      <ion-icon name="guquanchoujiang"></ion-icon>
+    </div>
+    <div class="walletList-integral">
+      <p>
+        <span>股权积分</span>
+        <span>{{guquanFund | number:'1.2-2'}}</span>
+      </p>
+    </div>
+    <div class="walletList-detailed">
+      <p>更多</p>
+    </div>
+  </div>
+
+  <!---->
+  <div class="walletList to-top" (click)="gotoPages(guquanPage)">
+    <div class="walletList-icon">
+      <ion-icon name="guquanshouyi"></ion-icon>
+    </div>
+    <div class="walletList-integral">
+      <p>
+        <span>股权收益</span>
+        <span>{{guquan | number:'1.2-2'}}</span>
+      </p>
+    </div>
+    <div class="walletList-detailed">
+      <p>更多</p>
+    </div>
+  </div>
+
+  <!--(click)="gotoPages(balancePage)"-->
+  <div class="walletList to-top" *ngIf="balance != 0">
+    <div class="walletList-icon">
+      <ion-icon name="yue"></ion-icon>
+    </div>
+    <div class="walletList-integral">
+      <p>
+        <span class="jieyu">结余积分</span>
+        <span>{{balance | number:'1.2-2'}}</span>
+      </p>
+    </div>
+    <div class="walletList-detailed"></div>
+    <!--<div class="walletList-detailed">-->
+      <!--<p>更多</p>-->
+    <!--</div>-->
+  </div>
+
+</ion-content>

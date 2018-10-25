@@ -1,0 +1,248 @@
+// 模态框的设置
+.motai{
+    background:rgba(0,0,0,0.3);
+}
+.motai .custom-popover{
+    width: 100%;
+    }
+.motai .popover-content{
+    width:100%!important;
+    bottom:0;
+    border-radius:0;
+    left:0!important;
+  overflow: inherit;
+}
+.motai .popover-viewport{
+    width:100%;
+}
+// 购物的显示页面
+.gouwude{
+    position:fixed;
+    bottom:0;
+    background:white;
+    width: 100%;
+}
+/*确定按钮*/
+.motai .sure{
+    text-align:center;
+    padding:15px 0;
+    color:white;
+    font-size:1.6rem;
+    width:100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  overflow: hidden;
+  margin: 0;
+
+}
+/*去掉小三角*/
+.motai .popover-arrow{
+    display:none!important;
+}
+
+/*关闭按钮*/
+.motai .guanbi{
+    position:absolute;
+    top:0;
+    right:0;
+    font-size:3rem!important;
+    color:#bbb9bc!important;
+}
+/*产品描述*/
+.choose-right{
+    width:50%;
+    float: left;
+    position:relative;
+    padding:0 3% 0 2%;
+  height: 100%;
+}
+.choose-child{
+    width:100%;
+    height: 150px;
+    max-height: 160px;
+    overflow: hidden;
+}
+/*图片*/
+.choose-child img{
+    display:block;
+    max-width:45%;
+    height: 100%;
+    float: left;
+}
+.motai .choose-right p:nth-child(1){
+    width:100%;
+    margin:0;
+    font-size:1.5rem;
+}
+.motai .choose-right p:nth-child(2){
+    width:100%;
+    margin:0;
+    font-size:1.4rem;
+    color: #666;
+  padding: 5px 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+/*价格*/
+.choose_jiage{
+    color:#ff4a02;
+  position: absolute;
+  bottom: 0;
+  left: 2%;
+}
+.choose_jiage span{
+    margin-left:5px;
+    font-size:1.8rem;
+  float: left;
+}
+.choose_jiage i{
+    font-size:1.8rem;
+  float: left;
+}
+/*规格*/
+.motai .guige>p{
+    font-size:1.8rem;
+    margin:0;
+}
+// 规格里面的选项
+.motai .guige-choose{
+    display:flex;
+    flex-wrap:wrap!important;
+}
+.motai .guige-choose button{
+    padding:7px 20px;
+    margin:10px 10px 10px 0;
+    font-size:1.5rem;
+    background:#eee;
+    border-radius:3px;
+    box-sizing:border-box;
+}
+
+/*数量*/
+.shuliang1{ padding-bottom: 60px}
+.shuliang1 button{
+    display:inline-block;
+    width: 40px;
+    height: 40px;
+    margin:10px 5px;
+  text-align: center;
+  line-height: 40px;
+  font-size: 2.4rem;
+  background: #eee;
+  overflow: hidden;
+  padding: 0;
+}
+.shangbai{
+    font-size:1.8rem;
+}
+.shuru{  // 控制手动输入数量的框
+    width:14%;
+    border:0;
+    text-align:center;
+    padding:3px;
+}
+
+
+
+.motai .back{
+    background:white!important;
+    border:1px solid #ff4a02;
+    padding: 6px 19px !important;
+    }
+// 控制底下‘确定’按钮的颜色
+
+ // 库存不足时，规格的样式
+.numberKong{
+    color:#bcb8bd;
+    border:1px dashed #acaaac;
+    background:none!important;
+}
+
+// 分享的页面显示
+.fenxiang{
+    position:fixed;
+    bottom:0;
+    background:none;
+    width:100%;
+    background:rgba(0,0,0,0.6);
+    opacity:0.8;
+}
+.fenxiang p{
+    color:white;
+    text-align:center;
+    margin:0;
+}
+// 分享到
+.fenxiang>div:nth-child(1){
+    font-size:1.8rem;
+    color:white;
+    border-bottom:1px solid white;
+    margin:0 20%;
+    padding:15px;
+    text-align:center;
+}
+// 第二排
+.fenxiang>div:nth-child(2){
+    display:flex;
+    justify-content:space-between;
+    margin:0 14% 0;
+}
+.fenxiang>div:nth-child(3){
+    display:flex;
+    justify-content:space-between;
+    margin:0 14% 15px;
+}
+
+.fenxiang>div:nth-child(2) div i{
+    display:block;
+    text-align:center;
+    padding:0;
+}
+.fenxiang>div:nth-child(2)>div:nth-child(1)>i{
+    color:#6fa706;
+    font-size:6rem;
+}
+.fenxiang>div:nth-child(2)>div:nth-child(2)>i{
+    color:#21a513;
+    font-size:6rem;
+}
+.fenxiang>div:nth-child(2)>div:nth-child(3)>i{
+    color:#ed6c66;
+    font-size:5.4rem;
+    margin-top:12%;
+}
+
+.fenxiang>div:nth-child(3)>div:nth-child(1)>i{
+    color:#63b3e6;
+    font-size:5rem;
+    display: block;
+    padding:0.6rem 0.6rem 0.6rem;
+
+}
+.fenxiang>div:nth-child(3)>div:nth-child(1)>p{
+    margin-top:0.1rem;
+}
+.fenxiang>div:nth-child(3)>div:nth-child(2)>i{
+    color:#f4c14d;
+    font-size:6rem;
+}
+.fenxiang>div:nth-child(3)>span{
+    padding:3rem;
+}
+// 取消
+.fenxiang>div:nth-child(4){
+    font-size:1.8rem;
+    color:white;
+    border-top:1px solid white;
+    margin:0 20%;
+    padding:12px 0 18px;
+    text-align:center;
+}
+.prevent{
+    position: absolute;
+    width: 50px;
+    height: 60px;
+    background: rgba(0,0,0,0);
+}

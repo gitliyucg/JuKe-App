@@ -1,0 +1,56 @@
+<ion-header>
+    <ion-toolbar>
+    <ion-navbar></ion-navbar>
+    <ion-title>报单金额充值</ion-title>
+    <ion-buttons end margin-right>
+        <button (click)="tobaodanList()">
+            <div>记录</div>
+        </button>
+    </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="jifen">
+<form [formGroup]="myForm">
+<ion-list>
+  <ion-item>
+    <ion-label>会员账号</ion-label>
+    <ion-input type="text" value="" placeholder="请输入会员账号" formControlName="UserID" ></ion-input>
+  </ion-item>
+  <!--<ion-item>-->
+    <!--<ion-label>公司账户</ion-label>-->
+    <!--<ion-select [(ngModel)]="bankAccount" formControlName="PrepaidAccount" placeholder="请选择公司账户" okText="确定" cancelText="取消">-->
+      <!--<ion-option *ngFor="let item of selectNav" value="{{item.Account}}">{{item.Bank}}</ion-option>-->
+    <!--</ion-select>-->
+
+  <!--</ion-item>-->
+  <ion-item>
+    <ion-label>充值金额</ion-label>
+    <ion-input type="number" placeholder="请输入充值金额"  value="" formControlName="Amount"></ion-input>
+  </ion-item>
+  <div class="error bgf">
+    <p [hidden] = "!myForm.hasError('intNum','Amount')" no-margin>
+      <ion-icon name="alert" float-left isActive="false"></ion-icon><span>充值金额必须为正整数</span>
+    </p>
+  </div>
+  <ion-item no-lines>
+    <ion-label>上传打款凭证</ion-label>
+  </ion-item>
+  <ion-grid class="upImg" padding-left padding-right>
+  <ion-row>
+    <ion-col col-3 (click)="getPicture(0)"><img [src]="avatarPath" width="100%"></ion-col>
+    <ion-col><button ion-button block color="light" (click)="getPicture(0)">从相册选择一张照片</button></ion-col>
+  </ion-row>
+  </ion-grid>
+  <div padding-top padding-left padding-right class="f16">留言</div>
+  <ion-item margin class="liuyan">
+    <ion-textarea placeholder="在此处给我们留言（填写银行流水单号等）" formControlName="MessageContent" rows="5"></ion-textarea>
+  </ion-item>
+</ion-list>
+
+<div padding>
+  <button ion-button block margin-bottom (click)="saveAvatar()" [disabled]="myForm.invalid || show">发送汇款留言</button>
+</div>
+  </form>
+
+</ion-content>

@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar>
+  <ion-navbar></ion-navbar>
+  <ion-title>关系导图</ion-title>
+  </ion-toolbar>
+  <ion-toolbar>
+  <ion-item *ngIf="ALevel">
+    <div>编号：{{ALevel.UserID}} | 姓名：{{ALevel.Name}} | 直推：{{ALevel.RecommendAmount}}</div>
+    <div>冻结状态：{{ALevel.IsFreeze}} | 注册时间：{{ALevel.RegTime| date:"y-MM-dd"}}</div>
+  </ion-item>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+
+  <ion-list class="guanxi">
+
+    <ion-item *ngIf="BLevel" >
+      <ion-grid *ngFor="let key of items; let i=index;" (click)="zhankai(i)" class="guanxiB">
+        <ion-row [ngSwitch]="BLevel[i].value" class="guanxiBrow">
+          <ion-col col-1 *ngSwitchCase=true><div class="jia">——</div></ion-col>
+          <ion-col col-1 *ngSwitchDefault><div class="jian">+</div></ion-col>
+          <ion-col>
+            <div>编号：{{BLevel[i].UserID}} | 姓名：{{BLevel[i].Name}} | 直推：{{BLevel[i].RecommendAmount}}</div>
+            <div>冻结状态：{{BLevel[i].IsFreeze}} | 注册时间：{{getTime(BLevel[i].RegTime)}}</div>
+          </ion-col>
+        </ion-row>
+        <div *ngIf="BLevel[i].value">
+        <ion-row *ngFor="let item of key">
+          <ion-col col-1></ion-col>
+          <ion-col>
+            <p><span class="label-ios-deepgray">编号：{{item.UserID}} | 姓名：{{item.Name}} | 直推：{{item.RecommendAmount}}</span></p>
+            <p><span class="label-ios-deepgray">冻结状态：{{item.IsFreeze}} | 注册时间：{{getTime(item.RegTime)}}</span></p>
+          </ion-col>
+        </ion-row>
+        </div>
+      </ion-grid>
+    </ion-item>
+  </ion-list>
+
+</ion-content>

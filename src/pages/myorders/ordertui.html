@@ -1,0 +1,67 @@
+<ion-header>
+  <ion-navbar>
+        <ion-title>退款/售后</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content class="jifen order-state orderInfo">
+  <form [formGroup]="myForm">
+    <ion-list padding>
+      <ion-row><span float-left>订单编号</span><span float-left>{{orderId}}</span></ion-row>
+      <ion-row><span float-left>下单时间</span><span float-left>{{getTime(orderTime)}}</span></ion-row>
+    </ion-list>
+
+  <ion-list radio-group formControlName="TID">
+    <ion-row>
+      <ion-col>
+        <ion-item >
+          <ion-label>订单状态</ion-label>
+        </ion-item>
+      </ion-col>
+      <ion-col col-4>
+        <ion-item >
+          <ion-label>未收货</ion-label>
+          <ion-radio value="0"></ion-radio>
+        </ion-item>
+      </ion-col>
+      <ion-col col-4>
+        <ion-item>
+          <ion-label>已收货</ion-label>
+          <ion-radio value="1"></ion-radio>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-list>
+    <ion-list>
+      <ion-row>
+        <ion-col>
+    <ion-item>
+      <ion-label>退款金额</ion-label>
+    </ion-item>
+        </ion-col>
+        <ion-col col-8><div style="margin-top: 16px" class="f16"><i class="icon tubiao">&#xe788;</i>{{Total}}</div></ion-col>
+      </ion-row>
+    </ion-list>
+    <ion-list>
+    <ion-item>
+      <ion-label>退款原因</ion-label>
+      <ion-select formControlName="Reason" placeholder="请选择退款原因" okText="确定" cancelText="取消">
+        <ion-option value="7天无理由退货">7天无理由退货</ion-option>
+        <ion-option value="大小/尺寸和商品描述不符">大小/尺寸和商品描述不符</ion-option>
+        <ion-option value="颜色/图案/款式和商品描述不符">颜色/图案/款式和商品描述不符</ion-option>
+        <ion-option value="重复下单拍错了">重复下单拍错了</ion-option>
+        <ion-option value="就是不想要了">就是不想要了</ion-option>
+      </ion-select>
+    </ion-item>
+    </ion-list>
+    <ion-list>
+    <ion-item>
+      <ion-label>退款说明</ion-label>
+      <ion-input type="text" formControlName="Message" placeholder="请输入退款说明"></ion-input>
+    </ion-item>
+  </ion-list>
+  </form>
+  <div padding>
+    <button ion-button block color="gray" (tap)="tuikuan($event)" [disabled]=myForm.invalid class="tuikuangBtn">申请退款</button>
+  </div>
+</ion-content>
+

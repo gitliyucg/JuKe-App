@@ -1,0 +1,106 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-navbar></ion-navbar>
+    <ion-title>复投</ion-title>
+    <ion-buttons end margin-right>
+      <button (click)="tofutouList()">
+        <div>记录</div>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="jifen">
+  <form [formGroup]="myForm">
+    <ion-list>
+      <ion-item>
+        <ion-label>报单余额</ion-label>
+        <ion-input type="number" value="{{baodanyue}}" readonly="true" ></ion-input>
+      </ion-item>
+      <!--<ion-item>-->
+        <!--<ion-label>天天奖励余额</ion-label>-->
+        <!--<ion-input type="number" value="{{shouyiyue}}" readonly="true"></ion-input>-->
+      <!--</ion-item>-->
+      <!--<ion-item>-->
+        <!--<ion-label>动态奖励余额</ion-label>-->
+        <!--<ion-input type="number" value="{{dongtaiyue}}" readonly="true"></ion-input>-->
+      <!--</ion-item>-->
+
+      <ion-item formGroupName="baodanGroup">
+        <ion-label>报单金额</ion-label>
+        <ion-input type="number" placeholder="{{minbaodan==0 ? '请输入报单金额' : '报单金额不能少于' + minbaodan}}" formControlName="needbaodanyue" value="" [(ngModel)]="needbaodanyue" (input)="focusInput()"></ion-input>
+        <input type="hidden" formControlName="minbaodan" value="{{minbaodan}}" [(ngModel)]="minbaodan">
+        <input type="hidden" formControlName="baodanyue" value="{{baodanyue}}" [(ngModel)]="baodanyue">
+      </ion-item>
+      <div *ngIf = "myForm.get(['baodanGroup','needbaodanyue']).dirty" class="error bgf">
+        <p *ngIf= "myForm.hasError('fl',['baodanGroup','needbaodanyue'])" no-margin>
+          <ion-icon name="alert" float-left isActive="false"></ion-icon><span>报单余额必须为正数，最多两位小数</span>
+        </p>
+        <p no-margin *ngIf="!myForm.hasError('fl',['baodanGroup','needbaodanyue'])&&needbaodanyue>baodanyue">
+          <ion-icon name="alert" float-left isActive="false"></ion-icon><span>报单余额不足</span>
+        </p>
+        <p no-margin *ngIf="!myForm.hasError('fl',['baodanGroup','needbaodanyue'])&&needbaodanyue<minbaodan">
+          <ion-icon name="alert" float-left isActive="false"></ion-icon><span>报单不能少于{{minbaodan}}</span>
+        </p>
+      </div>
+      <!--<div formGroupName="zuheGroup">-->
+        <!--<input type="hidden" formControlName="minzuhe" value="{{minzuhe}}" [(ngModel)]="minzuhe">-->
+        <!--<input type="hidden" formControlName="needzuhe" value="{{needzuhe}}" [(ngModel)]="needzuhe">-->
+      <!--<ion-item>-->
+        <!--<ion-label>天天奖励金额</ion-label>-->
+        <!--<ion-input type="number" placeholder="输入交易天天奖励金额" formControlName="needshouyiyue" value="" [(ngModel)]="needshouyiyue" (input)="focuszuhe()"></ion-input>-->
+        <!--<input type="hidden" formControlName="shouyiyue" value="{{shouyiyue}}" [(ngModel)]="shouyiyue">-->
+      <!--</ion-item>-->
+        <!--<div class="error bgf">-->
+          <!--<p *ngIf= "myForm.hasError('fl',['zuheGroup','needshouyiyue'])" no-margin>-->
+            <!--<ion-icon name="alert" float-left isActive="false"></ion-icon><span>天天奖励余额必须为正数，最多两位小数</span>-->
+          <!--</p>-->
+          <!--<p no-margin *ngIf="!myForm.hasError('fl',['zuheGroup','needshouyiyue'])&&needshouyiyue>shouyiyue">-->
+            <!--<ion-icon name="alert" float-left isActive="false"></ion-icon><span>天天奖励余额不足</span>-->
+          <!--</p>-->
+        <!--</div>-->
+      <!--<ion-item>-->
+        <!--<ion-label>动态奖励金额</ion-label>-->
+        <!--<ion-input type="number" placeholder="输入交易动态奖励金额" formControlName="needdongtaiyue" value="" [(ngModel)]="needdongtaiyue" (input)="focuszuhe()"></ion-input>-->
+        <!--<input type="hidden" formControlName="dongtaiyue" value="{{dongtaiyue}}" [(ngModel)]="dongtaiyue">-->
+      <!--</ion-item>-->
+      <!--</div>-->
+      <div class="error bgf">
+        <!--<p *ngIf= "myForm.hasError('fl',['zuheGroup','needdongtaiyue'])" no-margin>-->
+          <!--<ion-icon name="alert" float-left isActive="false"></ion-icon><span>动态奖励余额必须为正数，最多两位小数</span>-->
+        <!--</p>-->
+        <!--<p no-margin *ngIf="!myForm.hasError('fl',['zuheGroup','needdongtaiyue'])&&needdongtaiyue>dongtaiyue">-->
+          <!--<ion-icon name="alert" float-left isActive="false"></ion-icon><span>动态奖励余额不足</span>-->
+        <!--</p>-->
+        <p no-margin *ngIf="needbaodanyue>=minbaodan&&needzuhe<minzuhe">
+          <ion-icon name="alert" float-left isActive="false"></ion-icon><span>报单金额必须等于所需报单总额即{{minzuhe}}，您还需{{needmin}}</span>
+        </p>
+        <p no-margin *ngIf="needbaodanyue>=minbaodan&&needzuhe>minzuhe">
+          <ion-icon name="alert" float-left isActive="false"></ion-icon><span>报单余额必须等于报单总额减去报单余额，您已超出{{-needmin}}</span>
+        </p>
+      </div>
+      <ion-item>
+        <ion-label>报单数</ion-label>
+        <ion-input type="text" placeholder="请填写报单数（正整数）" value="{{baodanNum}}" formControlName="baodanNum" [(ngModel)]="baodanNum" (input)="focusbaodan()"></ion-input>
+      </ion-item>
+      <div class="error bgf">
+        <p no-margin *ngIf="myForm.hasError('intNum','baodanNum')">
+          <ion-icon name="alert" float-left isActive="false"></ion-icon><span>报单数必须为正整数</span>
+        </p>
+      </div>
+      <ion-item no-lines>
+        <ion-label>所需报单总额</ion-label>
+        <ion-input type="number" value="{{zonge}}" readonly="true"></ion-input>
+      </ion-item>
+      <p class="error" *ngIf="BaoDanConfig>0">
+        <ion-icon name="alert" float-left isActive="false" color="danger"></ion-icon>
+        <span color="danger" ion-text>报单不少于{{BaoDanConfig}}%的报单余额，{{OtherConfig}}%的天天奖励余额加动态奖励余额之和</span>
+      </p>
+    </ion-list>
+
+    <div padding>
+      <button ion-button block margin-bottom (click)="showConfirm($event)" [disabled]="myForm.invalid || needmin != 0 || show">复投</button>
+    </div>
+
+  </form>
+</ion-content>

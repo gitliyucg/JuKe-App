@@ -1,0 +1,180 @@
+.tianjiashouhuo{  //添加收货地址
+    background: #fff;
+    width:100%;
+    text-align: center;
+    padding:1rem;
+    color:#666;
+    margin:12px 0;
+}
+.tianjiashouhuo span{
+    font-size:1.6rem;
+}
+.tianjiashouhuo i{
+     font-size:1.6rem;
+}
+.chanpin{
+    margin-top:15px;
+}
+.chanpin1{     //产品列表
+    position:relative;
+    display:flex;
+    justify-content:flex-start;
+    background:#fff;
+    padding:15px;
+}
+.chanpin1>div:nth-child(1){
+    width:80%;
+}
+.chanpin1>div:nth-child(2){
+    width:100%;
+}
+
+.chanpin1>div:nth-child(1)>span{
+  display:block;
+  width:20px;
+  height:20px;
+  border-radius:50%;
+  text-align:center;
+  color:white;
+  line-height:20px;
+  background:#e6510d;
+  position:absolute;
+  top:12px;
+  left:12px;
+}
+.chanpin1>div:nth-child(1)>img{  //产品图片
+  width:100%;
+}
+//上半部分
+.chanpin1>div:nth-child(2){ // 图片右边的描述
+    padding:0 10px 10px;
+    position:relative;
+}
+.chanpin p{
+    margin:0;
+}
+.title_dingdan>span:nth-child(1){
+   font-size:1.5rem;
+}
+.title_dingdan>span:nth-child(3){
+   font-size:1.4rem;
+   color:#666!important;
+}
+.chanpin1>div:nth-child(2)>p>span:nth-child(2){
+    color:#858585;
+    margin-left:5px;
+}
+.chanpin1>div:nth-child(2)>div{
+   position:absolute;
+   width:100%;
+   left:10px;
+   bottom:0;
+}
+.chanpin1>div:nth-child(2)>div>i{
+    font-size:1.8rem;
+}
+.chanpin1>div:nth-child(2)>div>span:nth-of-type(1){
+    font-size:1.6rem;
+}
+.shuliang{
+    position:absolute;
+    right:10px;
+    bottom:0;
+}
+//下半部分
+.chanpin2{
+    width:100%;
+    display:flex;
+    justify-content:space-between;
+    background:#fff;
+    margin-top:5px;
+}
+.chanpin2>div>i{
+    font-size:1.4rem;
+    color:#fd4c06;
+  float: left;
+}
+.chanpin2{
+    padding:15px;
+}
+.chanpin2>div span:nth-last-of-type(2) {
+    color:#858585;
+  float: left;
+  margin-right: 10px;
+}
+.chanpin2>div span:nth-last-of-type(1) {
+    color:#fd4c06;
+  float: left;
+}
+.fukuanxuanze{  //付款选择
+    background:white;
+    margin:10px 0;
+}
+.fukuanxuanze p{
+    font-size:1.4rem;
+    padding:15px 15px 0;
+    margin:0;
+}
+.fukuanxuanze ion-item{
+    font-size:1.4rem!important;
+    color:#858585;
+}
+.tianjia_content textarea{
+    width:100%;
+    height:80px;
+    padding: 10px 15px;
+}
+//配送方式
+.peisong{
+    margin-bottom:10rem;
+    background:white;
+    display: flex;
+    justify-content:space-between;
+    padding:0 15px;
+}
+.peisong span{
+  float: left;
+}
+.peisong span:nth-of-type(2){
+    color:#fd4c06;
+}
+// 地址显示行
+.dizhi_secondLine{
+   white-space:normal
+}
+.dizhi_firstLine{
+    display:flex;
+    justify-content:flex-start;
+    align-items:center;
+}
+.dizhi_firstLine div:nth-child(3){
+    font-size:10px!important;
+    height:15px;
+    background:red;
+    color:white;
+    border-radius:4px;
+    text-align:center;
+    padding:0 4px 1px;
+    margin-left:10px;
+}
+.dizhi_firstLine div:nth-child(2){
+    margin-left:20px;
+}
+.dizhi_firstLine{
+    margin:0 0 10px 0px;
+}
+
+textarea{
+    border:0;
+    padding:10px;
+}
+
+
+
+@media screen and (max-width:321px) {
+.chanpin1>div:nth-child(1){
+    width:80%;
+    height:9rem;
+}
+}
+

@@ -1,0 +1,27 @@
+
+<ion-content (ionScroll)="scrollHandler($event)" class="news">
+  <toTop [viewCon]="content" id="toTop"></toTop>
+
+  <ion-slides #mySlider id="mySlider" autoplay="3000" *ngIf="slides.length>0" loop="true" (ionSlideTap)="toIndex()" (ionSlideAutoplayStop)="autoPlay()">
+    <ion-slide *ngFor="let slide of slides" >
+      <img src="{{slide.Images}}" class="slide-image" />
+      <div *ngIf="slide.Title" class="slide-title" padding=""><div>{{slide.Title}}</div></div>
+    </ion-slide>
+  </ion-slides>
+    <ion-list class="newsList">
+      <button ion-item *ngFor="let item of items" (tap)="toNewPage(item.ID)" detail-none>
+          <ion-row>
+            <ion-col col-4>
+              <img src={{item.Images}}>
+            </ion-col>
+            <ion-col col-8>
+              <h2>{{item.Title}}</h2>
+              <p text-right>{{getTime(item.Times)}}</p>
+            </ion-col>
+          </ion-row>
+        </button>
+    </ion-list>
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="正在加载..."></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

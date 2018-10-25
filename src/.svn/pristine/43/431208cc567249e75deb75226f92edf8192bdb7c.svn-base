@@ -1,0 +1,180 @@
+import { Component } from '@angular/core';
+import {FormBuilder, FormGroup, Validators,FormControl} from '@angular/forms';
+import { Injectable } from '@angular/core';
+import { Http} from '@angular/http';
+import {NavController} from "ionic-angular";
+import { Storage } from '@ionic/storage';
+import {HuzhuanlistPage} from "./huzhuanlist";
+import {SubSuccess} from "../succ/success";
+import {FileService} from "../../share/fileService";
+import {ShareModule} from "../../share/share.module";
+@Injectable()
+
+
+
+@Component({
+  templateUrl: 'huzhuan.html'
+})
+
+export class HuzhuanPage {
+  public show: boolean;
+  uid:string;
+  myForm:FormGroup;
+  zhuanhuan={};
+  CID:number;
+  jieshou=[];
+  chushi=[];
+  dongtaiyue:number; //动态余额
+  shouyiyue:number;   //天天奖励
+  baodanyue:number;  //报单余额
+  mymoney:number;
+  //shouxufei:number=0;
+  //shouxufeiCon:number;
+  zhuanhuanType="2";
+  jieshouType:string;
+  constructor(public formBuilder:FormBuilder,
+              public http:Http,
+              private nav:NavController,
+              private fileService: FileService,
+              private storage: Storage,
+              private share:ShareModule
+
+  ) {
+
+    this.myForm=formBuilder.group({
+      shouyiyue:[],
+      dongtaiyue:[],
+      baodanyue:[],
+      mymoney:[],
+      zhuanhuanType:['',Validators.required],
+      jieshouType:['',Validators.required],
+      Amount:['',[Validators.required,this.share.IntValidator]]
+    },{validator:this.getSumValidator});
+  }
+  ionViewDidEnter() {
+    this.storage.get('userStorage').then(value => {
+      if (value) {
+        this.uid = value.userid;
+        this.http.get(this.fileService.localUrl + '/action/Users/GetYue?uid=' + this.uid).subscribe(res => {
+          let mydata = res.json();
+          this.dongtaiyue = mydata.dongtai;
+          this.shouyiyue = mydata.tiantian;
+          this.baodanyue = mydata.RegBalance;
+          this.myForm.controls['dongtaiyue'].setValue(this.dongtaiyue);
+          this.myForm.controls['shouyiyue'].setValue(this.shouyiyue);
+          this.myForm.controls['baodanyue'].setValue(this.baodanyue);
+          this.ZChange();
+
+        })
+      }
+    })
+    this.http.get(this.fileService.localUrl + '/action/DuiHuan/GetZhuanHuan').subscribe(response => {
+      let mydata = response.json();
+      this.chushi = JSON.parse(mydata.S);
+      this.zhuanhuan=JSON.parse(mydata.A);
+      this.jieshouType = "动态奖励";
+    })
+  }
+
+  tozhuanList(){
+    this.nav.push(HuzhuanlistPage);
+  }
+  getSumValidator(g:FormGroup):any{
+    let s:FormControl = g.get('zhuanhuanType') as FormControl;
+    let c:FormControl = g.get('Amount') as FormControl;
+    if(s.value =="1"){
+      let w:FormControl = g.get('baodanyue') as FormControl;
+      let valid:boolean = (c.value<=w.value);
+      //console.log(c.value+'-'+w.value+'-'+valid)
+      return valid ? null : { getSums:true };
+
+    }else if(s.value =="2"){
+      let w:FormControl = g.get('shouyiyue') as FormControl;
+      let valid:boolean = (c.value<=w.value);
+      //console.log(c.value+'-'+w.value+'-'+valid)
+      return valid ? null : { getSums:true };
+    }else if(s.value =="3"){
+      let w:FormControl = g.get('dongtaiyue') as FormControl;
+      let valid:boolean = (c.value<=w.value);
+      //console.log(c.value+'-'+w.value+'-'+valid)
+      return valid ? null : { getSums:true };
+    }
+
+
+  }
+
+  ZChange(){
+    this.jieshou=[];
+    let zhuanhuanType = this.zhuanhuanType;
+
+    if(zhuanhuanType==='1'){
+      this.mymoney = this.baodanyue;
+    }else if(zhuanhuanType==='2'){
+      this.mymoney = this.shouyiyue;
+    }else if(zhuanhuanType==='3'){
+      this.mymoney = this.dongtaiyue;
+    }
+    this.jieshou = this.zhuanhuan[zhuanhuanType];
+  }
+  // SChange(){
+  //   this.shouxufeiCon = this.jieshouType;
+  // }
+
+  saveForm(){
+    this.show = true;
+    let type: Number;
+    //console.log(this.myForm.value.zhuanhuanType);
+    //console.log(this.myForm.value.jieshouType);
+    if(this.zhuanhuanType === '1' && this.jieshouType === '天天奖励')
+    {
+      type = 1;
+    }else if(this.zhuanhuanType === '1' && this.jieshouType === '动态奖励')
+    {
+      type = 2;
+    }else if(this.zhuanhuanType === '2' && this.jieshouType === '报单金额')
+    {
+      type = 3;
+    }else if(this.zhuanhuanType === '2' && this.jieshouType === '动态奖励')
+    {
+      type = 4;
+    }else if(this.zhuanhuanType === '3' && this.jieshouType === '报单金额')
+    {
+      type = 5;
+    }else if(this.zhuanhuanType === '3' && this.jieshouType === '天天奖励')
+    {
+      type = 6;
+    }
+
+    let params = {
+          "un":this.uid,
+          "cid":this.CID,
+          "Amount": this.myForm.value.Amount,
+          "type": type
+    }
+    this.fileService.showLoading();
+    this.fileService.loading.present().then(() => {
+      this.http.post(this.fileService.localUrl + '/action/DuiHuan/ZhuanHuobi',params).subscribe(response => {
+
+        let successObj: Object;
+        this.fileService.hideLoading();
+        if (response.json()==true) {
+
+          successObj = {
+            successImg: 'assets/img/succ.png',
+            successTitle: '转换成功',
+            successBtn2: '返回会员中心'
+          }
+
+        } else {
+          this.show = false;
+          successObj = {
+            successImg: 'assets/img/fail.png',
+            successTitle: '转换失败',
+            successBtn1: '重新转换'
+          }
+        }
+        this.nav.push(SubSuccess, { successObj: successObj});
+      });
+    })
+  }
+}

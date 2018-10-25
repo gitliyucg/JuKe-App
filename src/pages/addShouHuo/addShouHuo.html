@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-navbar></ion-navbar>
+    <ion-title>{{dizhibianji}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="add_shouhuo jifen">
+  <form [formGroup]="myForm">
+<ion-list>
+    <ion-item>
+      <ion-label>收货人</ion-label>
+      <ion-input type="text" placeholder="请输入收货人姓名" formControlName="Name" value="{{Name}}"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>联系方式</ion-label>
+      <ion-input type="number" placeholder="请输入收货人的手机号码" formControlName="Phone" value="{{Phone}}" maxLength="11"></ion-input>
+    </ion-item>
+    <div class="error bgf" [hidden]="!myForm.get('Phone').dirty">
+      <p no-margin [hidden]="!myForm.hasError('mobile','Phone')">
+        <ion-icon name="alert" float-left isActive="false"></ion-icon><span>请填写正确的手机号码</span>
+      </p>
+    </div>
+  <ion-item>
+    <ion-label>省份</ion-label>
+    <ion-select formControlName="Province" placeholder="请选择省份" okText="确定" cancelText="取消" (ionChange)="ShengChange()">
+      <ion-option *ngFor="let item of dataSheng" value="{{item.id}}|{{item.name}}">{{item.name}}</ion-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>城市</ion-label>
+    <ion-select formControlName="City" placeholder="请选择城市" okText="确定" cancelText="取消" (ionChange)="CityChange()" [disabled]="dataShi.length==0">
+      <ion-option *ngFor="let item of dataShi" value="{{item.id}}|{{item.name}}">{{item.name}}</ion-option>
+    </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-label>地区</ion-label>
+    <ion-select [(ngModel)]="Areas" formControlName="Areas" placeholder="请选择地区" okText="确定" cancelText="取消" [disabled]="dataQu.length==0" >
+      <ion-option *ngFor="let item of dataQu" value="{{item.name}}">{{item.name}}</ion-option>
+    </ion-select>
+  </ion-item>
+
+    <ion-item>
+      <ion-label>详细地址</ion-label>
+      <ion-input type="text" placeholder="请输入收货人的详细地址" formControlName="Address1" value="{{Address1}}"></ion-input>
+    </ion-item>
+
+    <div class="morendizhi clearfix" (click)="qiehuanmoren(State)" padding tappable>
+      <i class="icon tubiao" [class.morentubiao]="State==1" *ngIf="State==1">&#xe611;</i>
+      <i class="icon tubiao" *ngIf="State!==1">&#xe72a;</i>
+      <span>默认地址</span>
+    </div>
+</ion-list>
+  </form>
+  <p class="dizhi_tishi">若选项中没有您的地址，请选择好大致【省份、城市、地区】然后在详细地址处写好具体地址，并写上“（无地址选项）”以示标明'</p>
+  <div padding>
+    <button ion-button block (click)="makesure($event)" [disabled]="myForm.invalid">确定</button>
+  </div>
+</ion-content>

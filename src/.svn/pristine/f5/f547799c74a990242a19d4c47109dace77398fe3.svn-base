@@ -1,0 +1,17 @@
+
+/*去掉小三角*/
+.fenXiang .popover-arrow{
+    display:none!important;
+}
+
+/*关闭按钮*/
+.fenXiang .guanbi{
+    position:absolute;
+    top:0;
+    right:0;
+    font-size:4rem!important;
+    color:#bbb9bc!important;
+}
+
+
+

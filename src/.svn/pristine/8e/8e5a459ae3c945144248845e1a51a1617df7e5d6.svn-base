@@ -1,0 +1,20 @@
+<div *ngFor="let item of shuju" class="gwc_list">
+  <div class="yixuan-list" padding>
+    <button class="dian" [style.background-color]="item.buy ? '#fd4c06' : '#fff'" (tap)="xuanzhong(item.ID)"></button>
+    <img src={{item.Images}} (click)="xiangqing(item)">
+    <div class="yixuan-right">
+      <p >{{item.Title}}</p>
+      <p >{{item.ParamName}}</p>
+      <div class="jiage">
+        <i class="icon tubiao">&#xe788;</i>
+        <span>{{item.Price}}</span>
+      </div>
+    </div>
+
+    <div class="number">
+      <button (tap)="numchange(item.ID,'down')">-</button>
+      <span [class.moreNumber]="item.Num>99">{{item.Num}}</span>
+      <button (tap)="numchange(item.ID,'up')" [class.bianbian]="item.tishi2">+</button>
+    </div>
+  </div>
+</div>

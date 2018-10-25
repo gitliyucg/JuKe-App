@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-navbar></ion-navbar>
+    <ion-title>帮助与反馈</ion-title>
+    <ion-buttons end margin-right>
+      <button (click)="tohelp()">
+        <div>反馈</div>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-toolbar>
+    <ion-segment [(ngModel)]="help">
+      <ion-segment-button value="fankui" (tap)="myhelp('fankui')">
+        <div>我的反馈</div>
+      </ion-segment-button>
+      <ion-segment-button value="wenti" (tap)="myhelp('wenti')">
+        <div>常见问题</div>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div [ngSwitch]="help" class="help">
+  <ion-list *ngSwitchCase="'fankui'" no-lines>
+    <button ion-item *ngFor="let item of items" (tap)="myFeedBack(item.ID)">
+      <ion-row [ngSwitch]='item.States'>
+        <ion-col col-1><span class="helpwen">问</span></ion-col>
+        <ion-col col-9>{{item.Contents}}</ion-col>
+        <ion-col col-2 *ngSwitchCase="0"  class="icon-ios-danger">未处理</ion-col>
+        <ion-col col-2 *ngSwitchCase="1"  class="icon-ios-deepgray">待确认</ion-col>
+        <ion-col col-2 *ngSwitchCase="2"  class="icon-ios-gray">已关闭</ion-col>
+      </ion-row>
+
+    </button>
+  </ion-list>
+    <ion-list *ngSwitchCase="'wenti'" no-lines class="wenti">
+      <ion-item *ngFor="let item of items2" (click)="wentizhankai(item.ID)">
+        <ion-row [ngSwitch]="item.isToggled">
+          <ion-col col-1><span class="helpwen">问</span></ion-col>
+          <ion-col col-10>{{item.Title}}</ion-col>
+          <ion-col col-1 *ngSwitchCase=true><div class="helpsh"></div></ion-col>
+          <ion-col col-1 *ngSwitchDefault><div class="helpxia"></div></ion-col>
+        </ion-row>
+        <ion-row *ngIf="item.value" class="hasAn"><ion-col col-1><span class="helpda">答</span></ion-col><ion-col col-11 [innerHTML]="item.Contents"></ion-col></ion-row>
+      </ion-item>
+    </ion-list>
+  </div>
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)" *ngIf="key">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="加载中 ...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>
+

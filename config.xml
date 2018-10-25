@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="cn.hxig.jukezhongguo" version="0.3.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>剧客网</name>
+    <description>An awesome Ionic/Cordova app.</description>
+    <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
+    <content src="index.html" />
+    <access origin="*" />
+    <allow-navigation href="http://ionic.local/*" />
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />
+    <allow-intent href="tel:*" />
+    <allow-intent href="sms:*" />
+    <allow-intent href="mailto:*" />
+    <allow-intent href="geo:*" />
+    <preference name="webviewbounce" value="false" />
+    <preference name="UIWebViewBounce" value="false" />
+    <preference name="DisallowOverscroll" value="true" />
+    <preference name="android-minSdkVersion" value="14" />
+    <preference name="BackupWebStorage" value="none" />
+    <preference name="SplashMaintainAspectRatio" value="true" />
+    <preference name="FadeSplashScreenDuration" value="300" />
+    <preference name="SplashShowOnlyFirstTime" value="false" />
+    <preference name="SplashScreen" value="screen" />
+    <preference name="SplashScreenDelay" value="3000" />
+    <platform name="ios">
+        <icon heigth="57" src="resources/ios/icon/icon.png" width="57" />
+        <icon heigth="114" src="resources/ios/icon/icon@2x.png" width="114" />
+        <icon heigth="40" src="resources/ios/icon/icon-40.png" width="40" />
+        <icon heigth="80" src="resources/ios/icon/icon-40@2x.png" width="80" />
+        <icon heigth="120" src="resources/ios/icon/icon-40@3x.png" width="120" />
+        <icon heigth="50" src="resources/ios/icon/icon-50.png" width="50" />
+        <icon heigth="100" src="resources/ios/icon/icon-50@2x.png" width="100" />
+        <icon heigth="60" src="resources/ios/icon/icon-60.png" width="60" />
+        <icon heigth="120" src="resources/ios/icon/icon-60@2x.png" width="120" />
+        <icon heigth="180" src="resources/ios/icon/icon-60@3x.png" width="180" />
+        <icon heigth="72" src="resources/ios/icon/icon-72.png" width="72" />
+        <icon heigth="144" src="resources/ios/icon/icon-72@2x.png" width="144" />
+        <icon heigth="76" src="resources/ios/icon/icon-76.png" width="76" />
+        <icon heigth="152" src="resources/ios/icon/icon-76@2x.png" width="152" />
+        <icon heigth="167" src="resources/ios/icon/icon-83.5@2x.png" width="167" />
+        <icon heigth="29" src="resources/ios/icon/icon-small.png" width="29" />
+        <icon heigth="58" src="resources/ios/icon/icon-small@2x.png" width="58" />
+        <icon heigth="87" src="resources/ios/icon/icon-small@3x.png" width="87" />
+        <splach heigth="690" src="resourcse/ios/splash/Default@2x~iphone.png" width="640" />
+        <splach heigth="1163" src="resourcse/ios/splash/Default-568h@2x~iphone.png" width="640" />
+        <splach heigth="1334" src="resourcse/ios/splash/Default-667h.png" width="750" />
+        <splach heigth="2280" src="resourcse/ios/splash/Default-736h.png" width="1242" />
+        <splach heigth="1536" src="resourcse/ios/splash/Default-Landscape@2x~ipad.png" width="2048" />
+        <splach heigth="2048" src="resourcse/ios/splash/Default-Landscape@~ipadpro.png" width="2732" />
+        <splach heigth="1242" src="resourcse/ios/splash/Default-Landscape-736h.png" width="2208" />
+        <splach heigth="768" src="resourcse/ios/splash/Default-Landscape~ipad.png" width="1024" />
+        <splach heigth="1536" src="resourcse/ios/splash/Default-Portrait@2x~ipad.png" width="2048" />
+        <splach heigth="2732" src="resourcse/ios/splash/Default-Portrait@~ipadpro.png" width="2048" />
+        <splach heigth="1024" src="resourcse/ios/splash/Default-Portrait~ipad.png" width="768" />
+        <splach heigth="480" src="resourcse/ios/splash/Default~iphone.png" width="320" />
+    </platform>
+    <engine name="android" spec="^6.2.3" />
+    <engine name="ios" spec="^4.4.0" />
+    <plugin name="cordova-hot-code-push-plugin" spec="^1.5.3" />
+    <plugin name="cordova-plugin-app-update" spec="^1.3.9" />
+    <plugin name="cordova-plugin-app-version" spec="^0.1.9" />
+    <plugin name="cordova-plugin-camera" spec="^2.4.1" />
+    <plugin name="cordova-plugin-device" spec="^1.1.4" />
+    <plugin name="cordova-plugin-file-transfer" spec="^1.6.3" />
+    <plugin name="cordova-plugin-inappbrowser" spec="^1.7.1" />
+    <plugin name="cordova-plugin-secure-storage" spec="^2.6.8" />
+    <plugin name="cordova-plugin-splashscreen" spec="^4.0.3" />
+    <plugin name="cordova-plugin-statusbar" spec="^2.2.2" />
+    <plugin name="cordova-plugin-whitelist" spec="^1.3.1" />
+    <plugin name="ionic-plugin-keyboard" spec="^2.2.1" />
+</widget>

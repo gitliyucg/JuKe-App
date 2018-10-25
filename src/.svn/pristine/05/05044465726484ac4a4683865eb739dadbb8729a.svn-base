@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-navbar></ion-navbar>
+    <ion-title>收货地址管理</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="dizhiguanli">
+
+  <ion-list *ngFor="let childItem of items;let i=index" class="dizhiliebiao">
+    <ion-item>
+      <ion-row>
+        <ion-col col-3>{{childItem.Name}}</ion-col>
+        <ion-col col-4>{{childItem.Phone}}</ion-col>
+      </ion-row>
+      <ion-row class="dizhi_wra">
+        {{childItem.Province}}{{childItem.City}}{{childItem.Areas}}{{childItem.Address}}
+      </ion-row>
+      <ion-row class="dizhi_guanli">
+        <ion-col col-3 *ngIf="childItem.State==1" [class.morende]="childItem.State==1">
+          <i class="icon tubiao">&#xe611;</i> 默认地址</ion-col>
+        <ion-col col-3 *ngIf="childItem.State!==1" (click)="changeMoRen(childItem.ID)" tappable>
+          <i class="icon tubiao">&#xe72a;</i>
+           设为默认
+        </ion-col>
+        <ion-col col-5></ion-col>
+        <ion-col col-2 (click)="shanchu(childItem.ID,i,items)" tappable>删除</ion-col>
+        <ion-col col-2 (click)="bainji(childItem)" tappable>编辑</ion-col>
+      </ion-row>
+    </ion-item>
+
+  </ion-list>
+  <div class="kong"></div>
+</ion-content>
+<ion-footer>
+  <button class="tianjia button-ios-primary" (tap)="addshouhuo(items)"><i class="icon tubiao">&#xe613;</i> 添加收货地址</button>
+</ion-footer>

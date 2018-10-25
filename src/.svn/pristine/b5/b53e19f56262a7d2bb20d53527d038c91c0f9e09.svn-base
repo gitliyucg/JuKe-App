@@ -1,0 +1,19 @@
+
+.canlButton{
+  margin-right: 20px;
+  margin-top: -15px;
+  padding-bottom: 15px;
+}
+//.list-ios .item-block .item-inner{
+//  border: none;
+//}
+//.list .item-block .item-inner{
+//  border: none;
+//}
+
+.tixianlist.list .item-block .item-inner {
+  border-bottom: none;
+}
+.tixianlist.list-ios .item-block .item-inner{
+  border-bottom: none;
+}

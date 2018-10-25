@@ -1,0 +1,72 @@
+<ion-header>
+  <ion-navbar>
+        <ion-title>我的订单</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content class="orderInfo">
+  <ion-list padding>
+    <ion-row><span float-left>订单编号</span><span float-left>{{orderId}}</span></ion-row>
+    <ion-row><span float-left>下单时间</span><span float-left>{{getTime(orderTime)}}</span></ion-row>
+  </ion-list>
+  <ion-list padding>
+    <ion-row>
+      <span float-left>{{Name}}</span><span float-left>{{Phone}}</span>
+    </ion-row>
+    <ion-row>{{Address}}</ion-row>
+  </ion-list>
+  <ion-list no-margin *ngFor="let item of goods" class="order-goods">
+    <ion-row padding>
+      <ion-col col-4><img src='{{item.Images}}' width="100%"></ion-col>
+      <ion-col>
+        <div>{{item.Title}}</div>
+        <p class="label-ios-deepgray">{{item.Params}}</p>
+        <div class="order-goods-pr"><span float-left><i class="icon tubiao">&#xe788;</i>{{item.Price}}</span><span float-right>{{item.Num}}</span></div>
+      </ion-col>
+    </ion-row>
+    <!--<ion-row class="orderL_three" *ngIf="item.State==5||item.State==6||item.State==7">-->
+      <!--<button (tap)="chakanState(item.ID)" class="ord-queren">查看退款进度</button>-->
+    <!--</ion-row>-->
+    <!--<ion-row class="orderL_three" *ngIf="item.State==3||item.State==4">-->
+        <!--<button (tap)="tuikuan(item.ID,item.Price)" class="ord-quxiao">退款/售后</button>-->
+    <!--</ion-row>-->
+  </ion-list>
+  <ion-list padding>
+    <ion-row>
+      <span float-left>共{{TotalNum}}件</span>
+      <span float-right class="label-ios-primary">合计<i class="icon tubiao">&#xe788;</i>{{Total}}</span>
+    </ion-row>
+  </ion-list>
+  <ion-list padding>
+    <ion-row>
+      <span float-left>所用积分</span>
+      <span *ngIf="TotalBonus>0&&TotalDongTai<=0" float-left>天天奖励<span class="label-ios-primary">{{TotalBonus}}</span>积分</span>
+      <span *ngIf="TotalDongTai>0&&TotalBonus<=0" float-left>动态奖励<span class="label-ios-primary">{{TotalDongTai}}</span>积分</span>
+      <span *ngIf="TotalBonus>0&&TotalDongTai>0" float-left>天天奖励<span class="label-ios-primary">{{TotalBonus}}</span>积分</span>
+    </ion-row>
+    <ion-row *ngIf="TotalBonus>0&&TotalDongTai>0">
+      <span float-left>　　　　</span>
+      <span float-left>动态奖励<span class="label-ios-primary">{{TotalDongTai}}</span>积分</span>
+    </ion-row>
+  </ion-list>
+  <ion-list *ngIf="Marks" padding>
+    <ion-row>
+      <span float-left>您的留言</span>
+      <span>{{Marks}}</span>
+    </ion-row>
+  </ion-list>
+  <ion-list padding>
+    <ion-row>
+      <span float-left>配送方式</span>
+      <span float-right>快递 <span class="label-ios-primary">免费</span></span>
+    </ion-row>
+  </ion-list>
+</ion-content>
+<ion-footer class="orderL_three" style="background: #fff" *ngIf="order.State==3">
+  <button (tap)="shouHuo($event,orderId)" class="ord-queren">确认收货</button>
+</ion-footer>
+<ion-footer class="orderL_three" style="background: #fff" *ngIf="order.State==2">
+  <button (tap)="sureQuxiao($event,orderId)" class="ord-quxiao">取消订单</button>
+</ion-footer>
+<ion-footer class="orderL_three" style="background: #fff" *ngIf="order.State==1">
+  <button (tap)="shanchu($event,orderId)" class="ord-quxiao">删除订单</button>
+</ion-footer>

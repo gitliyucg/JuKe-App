@@ -1,0 +1,39 @@
+<!--
+  Generated template for the StockchangelistPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>股权兑换记录</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content (ionScroll)="scrollHandler($event)">
+  <toTop [viewCon]="content" id="toTop"></toTop>
+  <ion-list>
+    <ion-item *ngFor="let item of items">
+      <ion-row>
+        <ion-col>记录时间：{{getTime(item.RecordDate)}}</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col><span class="label-ios-deepgray">转换类型：</span>{{item.Reason}}</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col><span class="label-ios-deepgray">收入：</span>{{item.IncomeSum}}</ion-col>
+        <ion-col><span class="label-ios-deepgray">支出：</span>{{item.SpendSum}}</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col><span class="label-ios-deepgray">货币类型：</span>{{item.MoneyType}}</ion-col>
+        <ion-col><span class="label-ios-deepgray">货币余额：</span>{{item.Balance}}</ion-col>
+      </ion-row>
+    </ion-item>
+  </ion-list>
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event, UID)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="正在加载..."></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

@@ -1,0 +1,45 @@
+<!--
+  Generated template for the ChargelistPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-toolbar>
+    <ion-navbar></ion-navbar>
+    <ion-title>天天奖励充值</ion-title>
+    <ion-buttons end margin-right>
+      <!--<button (click)="tobaodanList()">-->
+      <!--<div>记录</div>-->
+      <!--</button>-->
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content (ionScroll)="scrollHandler($event)">
+  <toTop [viewCon]="content" id="toTop"></toTop>
+  <ion-item *ngFor="let item of items">
+    <ion-row>
+      <ion-col>充值日期：{{getTime(item.Times)}}</ion-col>
+    </ion-row>
+    <ion-row>
+      <!--<ion-col><span class="label-ios-deepgray">状态处理：</span>{{item.States}}</ion-col>-->
+      <ion-col *ngIf="item.States == 0"><span class="label-ios-deepgray">状态处理：</span>正在充值</ion-col>
+      <ion-col *ngIf="item.States == 1"><span class="label-ios-deepgray">状态处理：</span>已拒绝</ion-col>
+      <ion-col *ngIf="item.States == 2"><span class="label-ios-deepgray">状态处理：</span>已通过</ion-col>
+      <ion-col><span class="label-ios-deepgray">汇款金额：</span>{{item.Money}}</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col><span class="label-ios-deepgray">留言内容：</span>{{item.Message}}</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col><span class="label-ios-deepgray">拒绝原因：</span>{{item.FeedBack}}</ion-col>
+    </ion-row>
+    <ion-row *ngIf="ReplyTime">
+      <ion-col><span class="label-ios-deepgray">回复日期：</span>{{getTime(item.EndTime)}}</ion-col>
+    </ion-row>
+  </ion-item>
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="正在加载..."></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

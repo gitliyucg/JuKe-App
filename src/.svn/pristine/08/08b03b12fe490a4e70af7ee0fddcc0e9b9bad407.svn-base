@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-navbar>
+        <ion-title>填写物流信息</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content class="jifen order-state orderInfo">
+  <form [formGroup]="myForm">
+    <ion-list>
+    <ion-item>
+      <ion-label>退款原因</ion-label>
+      <ion-select formControlName="wuliuName" placeholder="请选择物流公司" okText="确定" cancelText="取消">
+        <ion-option value="DHL" selected="selected">DHL</ion-option>
+        <ion-option value="EMS">EMS</ion-option>
+        <ion-option value="顺丰速运">顺丰速运</ion-option>
+        <ion-option value="申通快递">申通快递</ion-option>
+        <ion-option value="圆通快递">圆通快递</ion-option>
+        <ion-option value="中通快递">中通快递</ion-option>
+        <ion-option value="韵达快递">韵达快递</ion-option>
+        <ion-option value="百世汇通">百世汇通</ion-option>
+        <ion-option value="宅急送快递">宅急送快递</ion-option>
+        <ion-option value="天天快递">天天快递</ion-option>
+        <ion-option value="德邦物流">德邦物流</ion-option>
+        <ion-option value="全峰快递">全峰快递</ion-option>
+        <ion-option value="优速物流">优速物流</ion-option>
+        <ion-option value="如风达">如风达</ion-option>
+        <ion-option value="邮政包裹">邮政包裹</ion-option>
+        <ion-option value="中铁快运">中铁快运</ion-option>
+        <ion-option value="新邦物流">新邦物流</ion-option>
+      </ion-select>
+    </ion-item>
+    </ion-list>
+    <ion-list>
+    <ion-item>
+      <ion-label>物流单号</ion-label>
+      <ion-input type="text" formControlName="wuliuCode" placeholder="请输入物流单号"></ion-input>
+    </ion-item>
+  </ion-list>
+  </form>
+  <div padding>
+    <button ion-button block (tap)="subwuliu($event)" [disabled]=myForm.invalid>提交</button>
+  </div>
+</ion-content>
+

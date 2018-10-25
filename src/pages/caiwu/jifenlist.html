@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-navbar>
+    <button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>积分互转</ion-title>
+  </ion-navbar>
+  <ion-toolbar>
+    <ion-segment [(ngModel)]="huzhuan">
+      <ion-segment-button value="zhuanru">
+        <div>转入清单</div>
+      </ion-segment-button>
+      <ion-segment-button value="zhuanchu">
+        <div>转出清单</div>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div [ngSwitch]="huzhuan">
+  <ion-list *ngSwitchCase="'zhuanru'">
+    <ion-item *ngFor="let item of items">
+      <ion-row><ion-col>转账时间：{{getTime(item.TransferDate)}}</ion-col></ion-row>
+      <ion-row><ion-col>对方编号：{{item.AcceptUserId}}</ion-col><ion-col>积分类型：{{item.MoneyType}}</ion-col></ion-row>
+      <ion-row><ion-col>交易数额：{{item.MoneySum}}</ion-col><ion-col>实际数额：{{item.FactSum}}</ion-col></ion-row>
+      <ion-row><ion-col>交易类型：{{item.TransferType}}</ion-col><ion-col>手续费：{{item.ServiceCharge}}</ion-col></ion-row>
+    </ion-item>
+  </ion-list>
+    <ion-list *ngSwitchCase="'zhuanchu'">
+      <ion-item *ngFor="let item of items2">
+        <ion-row><ion-col>转账时间：{{getTime(item.TransferDate)}}</ion-col></ion-row>
+        <ion-row><ion-col>对方编号：{{item.AcceptUserId}}</ion-col><ion-col>积分类型：{{item.MoneyType}}</ion-col></ion-row>
+        <ion-row><ion-col>交易数额：{{item.MoneySum}}</ion-col><ion-col>实际数额：{{item.FactSum}}</ion-col></ion-row>
+        <ion-row><ion-col>交易类型：{{item.TransferType}}</ion-col><ion-col>手续费：{{item.ServiceCharge}}</ion-col></ion-row>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>
+<ion-footer [ngSwitch]="huzhuan">
+  <ion-toolbar *ngSwitchCase="'zhuanru'">
+    <page-pagination [pagenums]="nums" (search)="doSearch($event)"></page-pagination>
+  </ion-toolbar>
+  <ion-toolbar *ngSwitchCase="'zhuanchu'">
+    <page-pagination [pagenums]="nums2" (search)="doSearch($event)"></page-pagination>
+  </ion-toolbar>
+</ion-footer>
+

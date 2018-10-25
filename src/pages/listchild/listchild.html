@@ -1,0 +1,45 @@
+<ion-header class="listchild-header">
+	<ion-navbar></ion-navbar>
+	<!--<ion-fab class="icon-fenxiang" (click)="presentPopover($event,product,uid,noTiao,fenxiang)">-->
+		<!--<a ion-fab mini>-->
+		<!--<i class="icon tubiao">&#xe601;</i>-->
+        <!--</a>-->
+	<!--</ion-fab>-->
+</ion-header>
+
+<ion-content class="list-child">
+	<img class="commodity-img" src="{{ product.Images }}">
+	<p class="list_child_title f18" padding>{{product.Title}}</p>
+	<!--<div class="image_down">-->
+		<!--<div><i class="icon tubiao ">&#xe611;</i><span>正品保证</span></div>-->
+		<!--<div><i class="icon tubiao ">&#xe611;</i><span>全场包邮</span></div>-->
+		<!--<div><i class="icon tubiao ">&#xe611;</i><span>七天退换</span></div>-->
+	<!--</div>-->
+	<div>
+
+		<!--产品详情列-->
+		<div class="chanpinxiangqing">
+			<div class="list_title f16">{{ product.About }}</div>
+			<div class="list_about f14" [innerHTML]="product.Contents"></div>
+		</div>
+
+		<!--猜你喜欢-->
+		<!--<div class="guess">
+			<guess-like></guess-like>
+		</div>-->
+	</div>
+
+
+</ion-content>
+<!--最底下tab栏-->
+<ion-footer>
+  <div class="buy" [class.ifchangeColor]="ifchangeColor" *ngIf="xingShi=='购物'">
+    <a (tap)="toCarts(uid,noTiao,this.items)">　
+      <i class="icon tubiao gouwuche-tubiao">&#xe624;</i>
+      <span class="gouwu-num" *ngIf="number">{{number}}</span>
+      <span class="gouwuche-text" >购物车</span>
+    </a>
+    <a (tap)="presentPopover($event,product,uid,noTiao,gouwu)" class="button-ios-gray">加入购物车</a>
+    <a (tap)="presentPopover($event,product,uid,tiao,gouwu)" class="button-ios-primary">立即兑换</a>
+  </div>
+</ion-footer>

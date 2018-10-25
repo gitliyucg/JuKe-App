@@ -1,0 +1,78 @@
+
+<ion-header class="member_header">
+  <ion-toolbar>
+    <button class="xiaoxi" (click)="toMemberPage(xiaoxiPage)">
+      <span *ngIf="xiaoxinum>0"></span>
+      <i class="icon tubiao mesg">&#xe6c2;</i>
+    </button>
+    <button class="shopCart" (click)="toShopCart()">
+      <span *ngIf="number>0" >{{number}}</span>
+      <i class="icon tubiao mesg">&#xe624;</i>
+    </button>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="member-con">
+  <div class="memberBg">
+    <img src="assets/img/head.png" class="memberhead">
+    <div class="membername">{{userid}}，{{name}}<span *ngIf="isBaodan=='1'">(报单中心)</span></div>
+    <img src="assets/img/blank.png" width="100%"/>
+  </div>
+  <div class="memberData">
+    <ion-row>
+      <ion-col>
+          <p>天天奖励：{{shouyitoday}}</p>
+          <p>总收益：{{shouyizonge}}</p>
+      </ion-col>
+      <ion-col>
+          <p>动态奖励：{{dongtaitoday}}</p>
+          <p>总奖励：{{dongtaizonge}}</p>
+      </ion-col>
+    </ion-row>
+  </div>
+  <ion-list class="memberorderitem">
+    <button ion-item  no-lines (click)="toOrder({myOrderInType:'会员中心',state:''})">
+      <ion-icon name="wodedingdan" item-start></ion-icon>
+      我的订单
+      <span class="label-ios-deepgray f14 itemspan">查看更多订单</span>
+    </button>
+    <ion-grid class="memberOrder">
+      <ion-row>
+        <ion-col class="huohuo" (click)="toOrder({myOrderInType:'会员中心',state:2})">
+          <span *ngIf="numDfh>0" class="shuliangWenzi">{{numDfh}}</span>
+           <i class="icon tubiao huo">&#xe634;</i>
+          <p>待发货</p>
+        </ion-col>
+        <ion-col class="huohuo" (click)="toOrder({myOrderInType:'会员中心',state:3})">
+          <span *ngIf="numDsh>0" class="shuliangWenzi">{{numDsh}}</span>
+          <i class="icon tubiao huo">&#xe604;</i>
+          <p>待收货</p>
+        </ion-col>
+        <ion-col class="huohuo" (click)="toOrder({myOrderInType:'会员中心',state:6})">
+          <span *ngIf="numSh>0">{{numSh}}</span>
+          <i class="icon tubiao huo">&#xe6d9;</i>
+          <p>退款/售后</p>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-list>
+  <ion-list no-lines class="memberList">
+    <button ion-item (click)="toMemberPage(baodanPage)">
+      <ion-icon name="baodanyue" item-start></ion-icon>
+      报单余额
+      <span class="label-ios-deepgray f14 itemspan">{{baodanzonge}}</span>
+    </button>
+
+    <button ion-item (click)="toMemberPage(caiwuPage)">
+      <ion-icon name="caiwuzhongxin" item-start></ion-icon>
+      财务中心
+    </button>
+    <button ion-item (click)="toMemberPage(tuiguangPage)">
+      <ion-icon name="wodetuiguang" item-start></ion-icon>
+      我的推广
+    </button>
+    <button ion-item (click)="toMemberPage(shezhiPage)">
+      <ion-icon name="shezhi" item-start></ion-icon>
+      设置
+    </button>
+  </ion-list>
+</ion-content>

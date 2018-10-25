@@ -1,0 +1,23 @@
+page-balance {
+  .balance-wrap{
+    background-repeat: no-repeat;
+    background-image: url("../assets/img/jieyu-banner.png");
+    background-size: 100% 100%;
+    height: 16rem;
+    text-align: center;
+    line-height: 16rem;
+  }
+  .balance-wrap p{
+    display: inline-block;
+    font-size: 4.5rem;
+    color: #ffffff;
+    margin: 0;
+  }
+  .about-balance{
+    font-size: 1.6rem;
+    color: #ff4a02;
+  }
+  .about-balance p:nth-of-type(2){
+    color: #999999;
+  }
+}

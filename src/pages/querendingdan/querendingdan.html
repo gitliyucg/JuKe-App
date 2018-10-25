@@ -1,0 +1,90 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-navbar></ion-navbar>
+    <ion-title>确认订单</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="tianjia_content" [ngSwitch]='ifDizhi'>
+
+  <!--当用户还没设置自己的默认收货地址时，显示的-->
+  <div class="tianjiashouhuo" (click)="addshouhuo()" *ngSwitchCase="'没地址'">
+    <i class="icon tubiao">&#xe613;</i>
+    <span>添加收货地址</span>
+  </div>
+
+  <!--当用户已经设置过自己的默认收货地址，显示的-->
+  <ion-list *ngSwitchCase="'有地址'" (click)="dizhiguanli()">
+    <button ion-item>
+      <ion-row class="dizhi_firstLine">
+        <div>{{name}}</div>
+        <div>{{phone}}</div>
+        <div>{{moren}}</div>
+      </ion-row>
+
+      <ion-row class="dizhi_secondLine">
+        {{dizhi}}
+      </ion-row>
+
+    </button>
+  </ion-list>
+
+  <div *ngFor="let aa of item;let i=index" class="chanpin">
+    <div class="chanpin1">
+      <div>
+        <!--span>{{i+1}}</span-->
+        <img src="{{aa.Images}}">
+      </div>
+      <div>
+        <p class="title_dingdan">
+          <span>{{aa.Title}}</span><br>
+          <span>{{aa.ParamName}}</span>
+        </p>
+        <div>
+          <i class="icon tubiao">&#xe788;</i>
+          <span>{{aa.Price}}</span>
+          <span class="shuliang">x{{aa.Num}}</span>
+        </div>
+      </div>
+    </div>
+    <div class="chanpin2">
+      <p>共{{aa.Num}}件</p>
+      <div>
+        <span>合计</span>
+        <i class="icon tubiao">&#xe788;</i>
+        <span>{{(aa.Price*aa.Num).toFixed(2)}}</span>
+      </div>
+    </div>
+  </div>
+  <div class="fukuanxuanze">
+    <p>请选择使用积分</p>
+    <ion-item>
+      <ion-label>天天奖励{{shouyiyue}}积分,{{jifentishi1}}</ion-label>
+      <ion-toggle color="secondary" checked="checked1" [(ngModel)]="checked1" (ionChange)="checkedmeney(shouyiyue)"></ion-toggle>
+      <!--(ionChange)="tianTianShouYi(checked1)"-->
+    </ion-item>
+    <ion-item no-lines>
+      <ion-label>动态奖励{{dongtaiyue}}积分,{{jifentishi2}}</ion-label>
+      <ion-toggle color="secondary" checked="checked2" [(ngModel)]="checked2" (ionChange)="checkedmeney(dongtaiyue)"></ion-toggle>
+      <!--(ionChange)="DongTaiJiangLi(checked2)"-->
+    </ion-item>
+  </div>
+  <textarea placeholder="您的留言：" (input)="onInput($event)"></textarea>
+  <div class="peisong">
+    <p>配送方式</p>
+    <p>
+      <span>快递</span>
+      <span>免费</span>
+    </p>
+  </div>
+
+
+</ion-content>
+<ion-footer>
+  <div class="tijiao">
+  <span>合计</span>
+  <i class="icon tubiao">&#xe788;</i>
+  <span>{{totalPrice.toFixed(2)}}</span>
+    <span *ngIf="!buttonKey" class="cart-span button-ios-gray">支付</span>
+  <button (tap)="zhifu($event)" *ngIf="buttonKey" class="cart-span button-ios-primary">支付</button>
+</div>
+</ion-footer>

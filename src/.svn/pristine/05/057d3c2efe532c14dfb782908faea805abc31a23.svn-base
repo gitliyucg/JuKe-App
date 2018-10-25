@@ -1,0 +1,49 @@
+import { Component } from '@angular/core';
+import {NavController} from 'ionic-angular';
+import { JifenPage } from "./jifen";
+import { TixianPage } from "./tixian";
+import { ShouyiPage } from '../shouyi/shouyi';
+import { LiushuiPage } from '../liushui/liushui';
+import {FileService} from "../../share/fileService";
+import {Http} from "@angular/http";
+import { Storage } from '@ionic/storage';
+import {HuzhuanPage} from "./huzhuan";
+
+@Component({
+  templateUrl: '../member/pagelist.html'
+})
+
+export class CaiwuPage {
+  pageTitle = "财务中心";
+  lists: Array<any> = [
+    { name: '收益明细', url: ShouyiPage, icon: 'shouyimingxi' },
+    { name: '收支流水', url: LiushuiPage, icon: 'shouzhiliushui' },
+    { name: '收益转换', url: HuzhuanPage, icon: 'huzhuan' }
+  ];
+  constructor(public nav: NavController,private fileService: FileService,private http: Http,public storage: Storage,) {
+
+  }
+  ionViewDidLoad(){
+    this.storage.get('userStorage').then(value => {
+      this.http.get(this.fileService.localUrl + '/action/TuiGuang/GetConf/'+value.CID).subscribe(response => {
+        console.log(typeof response)
+        console.log(response.json())
+        let mydata = response.json();
+        if (mydata[0].IsWithdraw === 1) {
+          this.lists.push({name: '天天奖励提现', url: TixianPage, icon: 'tiantianshouyitixian'})
+        }
+        if (mydata[0].IsTransfer === 1) {
+          this.lists.push({name: '积分互转', url: JifenPage, icon: 'jifenhuzhuan'})
+        }
+      });
+    })
+  }
+  toNewPage(url) {
+
+    this.nav.push(url);
+  }
+
+}
+
+
+

@@ -1,0 +1,57 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-navbar></ion-navbar>
+    <ion-title>收益转换</ion-title>
+    <ion-buttons end margin-right>
+      <button (click)="tozhuanList()">
+        <div>记录</div>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="jifen">
+  <form [formGroup]="myForm">
+    <ion-list>
+      <ion-item>
+        <ion-label float-left>转换类型</ion-label>
+        <ion-select placeholder="请选转换类型" okText="确定" cancelText="取消" (ionChange)="ZChange()" formControlName="zhuanhuanType" [(ngModel)]="zhuanhuanType">
+          <ion-option *ngFor="let item of chushi" value="{{item.id}}">{{item.name}}</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label float-left>所剩余额</ion-label>
+        <ion-input type="number" formControlName="mymoney" [(ngModel)]="mymoney" readonly="true" placeholder="您选择后所剩的余额"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>接受类型</ion-label>
+        <ion-select  placeholder="请选择接受类型" okText="确定" cancelText="取消" formControlName="jieshouType" [(ngModel)]="jieshouType">
+          <ion-option *ngFor="let item of jieshou" value="{{item.id}}">{{item.name}}</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label>交易数额</ion-label>
+        <ion-input type="number" placeholder="请输入正整数" value="" formControlName="Amount" [(ngModel)]="Amount"></ion-input>
+      </ion-item>
+      <div [hidden]="myForm.get('Amount').untouched" class="error bgf">
+        <div *ngIf="!myForm.hasError('required','Amount')">
+          <p [hidden]="!myForm.hasError('intNum','Amount')" no-margin>
+            <ion-icon name="alert" float-left isActive="false"></ion-icon><span>交易数额必须是正整数</span>
+          </p>
+        </div>
+        <div *ngIf="myForm.get('zhuanhuanType').value">
+          <div *ngIf="!myForm.hasError('required','Amount')&&!myForm.hasError('sum','Amount')">
+            <p [hidden]="myForm.get('Amount').value<=mymoney" no-margin>
+              <ion-icon name="alert" float-left isActive="false"></ion-icon><span>交易数额必须小于所剩余额</span>
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </ion-list>
+
+    <div padding>
+      <button ion-button block margin-bottom [disabled]=myForm.invalid (tap)="saveForm($event)">确认</button>
+    </div>
+  </form>
+</ion-content>

@@ -1,0 +1,64 @@
+<!--
+  Generated template for the ChargePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-toolbar>
+    <ion-navbar></ion-navbar>
+    <ion-title>天天奖励充值</ion-title>
+    <ion-buttons end margin-right>
+      <button (click)="tochargeList()">
+        <div>记录</div>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="jifen order-state orderInfo">
+  <form [formGroup]="myForm">
+    <ion-item>
+      <ion-label>充值金额</ion-label>
+      <ion-input type="number" placeholder="请输入充值金额"  value="" formControlName="Amount"></ion-input>
+    </ion-item>
+    <!--<ion-list radio-group formControlName="TID">-->
+      <!--<ion-row>-->
+        <!--<ion-col>-->
+          <!--<ion-item style="display: grid">-->
+            <!--<ion-label>充值类型</ion-label>-->
+          <!--</ion-item>-->
+        <!--</ion-col>-->
+        <!--<ion-col col-4>-->
+          <!--<ion-item >-->
+            <!--<ion-label>积分充值</ion-label>-->
+            <!--<ion-radio value="0"></ion-radio>-->
+          <!--</ion-item>-->
+        <!--</ion-col>-->
+        <!--<ion-col col-4>-->
+          <!--<ion-item>-->
+            <!--<ion-label>现金充值</ion-label>-->
+            <!--<ion-radio value="1"></ion-radio>-->
+          <!--</ion-item>-->
+        <!--</ion-col>-->
+      <!--</ion-row>-->
+    <!--</ion-list>-->
+    <ion-item no-lines>
+      <ion-label>上传打款凭证</ion-label>
+    </ion-item>
+    <ion-grid class="upImg" padding-left padding-right>
+      <ion-row>
+        <ion-col col-3 (click)="getPicture(0)"><img [src]="avatarPath" width="100%"></ion-col>
+        <ion-col><button ion-button block color="light" (click)="getPicture(0)">从相册选择一张照片</button></ion-col>
+      </ion-row>
+    </ion-grid>
+    <div padding-top padding-left padding-right class="f16">留言</div>
+    <ion-item margin class="liuyan">
+      <ion-textarea placeholder="在此处给我们留言（填写银行流水单号等）" type="text" formControlName="MessageContent" rows="5"></ion-textarea>
+    </ion-item>
+
+    <div padding>
+      <button ion-button block margin-bottom (click)="saveAvatar()" [disabled]="myForm.invalid || show">发送汇款留言</button>
+    </div>
+  </form>
+</ion-content>

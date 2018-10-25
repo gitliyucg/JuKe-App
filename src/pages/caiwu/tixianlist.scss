@@ -1,0 +1,30 @@
+
+.canlButton{
+  margin-right: 20px;
+  margin-top: -15px;
+  padding-bottom: 15px;
+}
+//.list-ios .item-block .item-inner{
+//  border: none;
+//}
+//.list .item-block .item-inner{
+//  border: none;
+//}
+
+.tixianlist.list .item-block .item-inner {
+  border-bottom: none;
+}
+.tixianlist.list-ios .item-block .item-inner{
+  border-bottom: none;
+}
+.radio-list{ padding: 0 16px; margin-bottom: -1px;}
+.radio-list .item-ios .radio-ios{ margin-left: 0px; margin-right: 0px;}
+.radio-list .input-wrapper{ flex: none;}
+#BaoDanCZ.jifen .label-ios,#BaoDanCZ.jifen .label-md{ min-width: 0;}
+.radio-list .label-ios{ margin-right: 10px;}
+.radio-list .item .radio{ margin-top: 10px;}
+.radio-list.list-ios{
+  margin-bottom: 0;border-bottom: 1px solid #ededed;
+}
+#BaoDanCZ .radio-list.list-ios .row{ border-bottom: 1px solid #ededed;}
+.baodan-one-border.item-ios.item-block .item-inner{border-bottom: 1px solid #ededed; margin-bottom: 1px;}
