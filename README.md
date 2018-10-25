@@ -1,4 +1,6 @@
-This is a starter template for [Ionic](http://ionicframework.com/docs/) projects.
+剧客APP
+
+ionic2 + angular2 混合式开发
 
 ## How to use this template
 
